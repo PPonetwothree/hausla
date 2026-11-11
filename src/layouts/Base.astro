@@ -13,6 +13,16 @@ interface Props { title?: string; description?: string; lang?: string; noindex?:
 const { title, description = site.description, lang = 'en', noindex = false } = Astro.props;
 const fullTitle = title ? `${title} · ${site.name}` : `${site.name} — ${site.tagline}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+
+// Search: which section a page belongs to (used as a filter on /search).
+const rel = Astro.url.pathname.replace(import.meta.env.BASE_URL.replace(/\/$/, ''), '');
+const section = rel.startsWith('/guides') ? 'Guides'
+  : rel.startsWith('/find-care') ? 'Find care'
+  : rel.startsWith('/start') ? 'Start here'
+  : rel.startsWith('/support') ? 'Support'
+  : rel.startsWith('/learn') || rel.startsWith('/glossary') ? 'Learn'
+  : 'About Hausla';
+const searchable = !noindex && !rel.startsWith('/search');
 ---
 <!doctype html>
 <html lang={lang} id="top">
@@ -34,7 +44,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <Header />
-    <main id="main" tabindex="-1">
+    <main id="main" tabindex="-1" data-pagefind-body={searchable ? '' : undefined}>
+      {searchable && <span hidden data-pagefind-filter="section">{section}</span>}
       <slot />
     </main>
     <Footer />

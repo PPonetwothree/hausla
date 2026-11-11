@@ -6,7 +6,7 @@ import { crisis } from '../lib/site';
 <details class="crisis" data-close-outside>
   <summary>
     <Icon name="phone" size={18} />
-    <span>Talk to someone</span>
+    <span class="full">Talk to someone</span><span class="short" aria-hidden="true">Talk</span>
   </summary>
   <div class="panel" role="group" aria-label="Free helplines">
     <p class="intro">If you are struggling or in danger, you don't have to wait. These lines are free.</p>
@@ -42,6 +42,14 @@ import { crisis } from '../lib/site';
     white-space: nowrap;
   }
   summary::-webkit-details-marker { display: none; }
+  summary :global(svg) { flex: none; }
+  .short { display: none; }
+  /* Narrow phones: keep the helpline button, shorten its label (screen readers still hear the full one). */
+  @media (max-width: 26rem) {
+    summary { padding-inline: var(--s3); }
+    .full { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .short { display: inline; }
+  }
   summary:hover, .crisis[open] summary { background: var(--surface-clay); }
   .panel {
     position: absolute;

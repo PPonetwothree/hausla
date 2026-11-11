@@ -51,7 +51,10 @@ of every session and update it at the end.
   Hanken Grotesk (headings), Mukta (Devanagari).
 - Interactive bits: small inline `<script>`s. Add Preact islands only when a
   component genuinely needs state (finance finder, filters).
-- Search (Phase 1): Pagefind. Charts (Phase 4): Observable Plot; India maps must
+- Search: Pagefind 1.5.2 runs after `astro build` (see `package.json`). Pages are indexed via
+  `data-pagefind-body` on `<main>` in `Base.astro`; `noindex` pages are left out. Section filter
+  is derived from the URL there. Search UI: `src/pages/search.astro`. Not available in `astro dev`.
+- Charts (Phase 4): Observable Plot; India maps must
   use official Survey of India boundaries.
 - Deploy: `.github/workflows/deploy.yml` builds on push to `main`.
 

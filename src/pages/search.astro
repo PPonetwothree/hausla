@@ -1,0 +1,129 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { url } from '../lib/url';
+const sections = ['Start here', 'Guides', 'Find care', 'Learn', 'Support', 'About Hausla'];
+---
+<Base title="Search" description="Search Hausla's guides, hospital directory and practical help.">
+  <div class="container page">
+    <header class="head stack">
+      <p class="eyebrow">Search</p>
+      <h1>Search Hausla</h1>
+    </header>
+
+    <form class="search" role="search" action={url('/search')} method="get" data-search>
+      <div class="field">
+        <label for="q">What are you looking for?</label>
+        <div class="box">
+          <Icon name="search" size={20} />
+          <input id="q" name="q" class="input" type="search" autocomplete="off" placeholder="Try: biopsy, Ayushman, AIIMS, where to stay" />
+        </div>
+      </div>
+      <fieldset>
+        <legend>Show</legend>
+        <div class="chips">
+          <label><input type="radio" name="section" value="" checked /> Everything</label>
+          {sections.map((s) => <label><input type="radio" name="section" value={s} /> {s}</label>)}
+        </div>
+      </fieldset>
+    </form>
+
+    <p class="status small muted" aria-live="polite" data-status>Type a word to search.</p>
+    <ol class="results" role="list" data-results></ol>
+    <noscript><p>Search needs JavaScript. You can browse instead from the <a href={url('/start')}>Start here</a> page.</p></noscript>
+  </div>
+</Base>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-search]')!;
+  const input = form.querySelector<HTMLInputElement>('#q')!;
+  const status = document.querySelector<HTMLElement>('[data-status]')!;
+  const list = document.querySelector<HTMLElement>('[data-results]')!;
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+  let pagefind: any = null;
+  let run = 0;
+
+  async function load() {
+    if (pagefind) return pagefind;
+    const path = `${base}/pagefind/pagefind.js`;
+    pagefind = await import(/* @vite-ignore */ path);
+    await pagefind.options({ excerptLength: 24 });
+    return pagefind;
+  }
+
+  async function search() {
+    const q = input.value.trim();
+    const section = (new FormData(form).get('section') as string) || '';
+    const mine = ++run;
+    const params = new URLSearchParams();
+    if (q) params.set('q', q);
+    if (section) params.set('section', section);
+    history.replaceState(null, '', params.toString() ? `?${params}` : location.pathname);
+    if (!q) { list.replaceChildren(); status.textContent = 'Type a word to search.'; return; }
+    status.textContent = 'Searching…';
+    try {
+      const pf = await load();
+      const res = await pf.search(q, section ? { filters: { section } } : {});
+      const items = await Promise.all(res.results.slice(0, 20).map((r: any) => r.data()));
+      if (mine !== run) return; // a newer search has started
+      list.replaceChildren(...items.map((d: any) => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = d.url; a.textContent = d.meta?.title ?? d.url;
+        const tag = document.createElement('span');
+        tag.className = 'tag'; tag.textContent = d.filters?.section?.[0] ?? '';
+        const p = document.createElement('p');
+        p.innerHTML = d.excerpt; // Pagefind escapes page text; only <mark> is added
+        li.append(tag, a, p);
+        return li;
+      }));
+      const n = res.results.length;
+      status.textContent = n === 0
+        ? `Nothing found for “${q}”. Try a simpler word, or check the spelling.`
+        : `${n} result${n === 1 ? '' : 's'} for “${q}”${n > 20 ? ' (showing the first 20)' : ''}`;
+    } catch {
+      status.textContent = 'Search could not load. Please check your connection and try again.';
+    }
+  }
+
+  let t: number | undefined;
+  input.addEventListener('input', () => { clearTimeout(t); t = window.setTimeout(search, 200); });
+  form.addEventListener('change', search);
+  form.addEventListener('submit', (e) => { e.preventDefault(); search(); });
+
+  const start = new URLSearchParams(location.search);
+  if (start.get('section')) {
+    const r = form.querySelector<HTMLInputElement>(`input[name=section][value="${CSS.escape(start.get('section')!)}"]`);
+    if (r) r.checked = true;
+  }
+  if (start.get('q')) { input.value = start.get('q')!; search(); }
+</script>
+
+<style>
+  .page { padding-block: var(--s8) var(--s6); max-width: 52rem; }
+  .head { --stack: var(--s3); margin-bottom: var(--s5); }
+  .search { display: grid; gap: var(--s4); }
+  .box { position: relative; }
+  .box :global(svg) { position: absolute; left: var(--s4); top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+  .box .input { padding-left: 3rem; font-size: var(--text-lg); }
+  fieldset { border: 0; padding: 0; margin: 0; }
+  legend { font-family: var(--font-head); font-weight: 600; margin-bottom: var(--s2); font-size: var(--text-sm); }
+  .chips { display: flex; flex-wrap: wrap; gap: var(--s2); }
+  .chips label {
+    display: inline-flex; align-items: center; min-height: 44px; padding: var(--s2) var(--s4);
+    border: 1.5px solid var(--line-strong); border-radius: var(--radius-pill); background: var(--surface);
+    cursor: pointer; font-size: var(--text-sm);
+  }
+  .chips label:hover { border-color: var(--primary); }
+  .chips input { position: absolute; opacity: 0; pointer-events: none; }
+  .chips label:has(input:checked) { background: var(--primary); border-color: var(--primary); color: var(--primary-ink); font-weight: 600; }
+  .chips label:has(input:focus-visible) { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .status { margin-top: var(--s5); }
+  .results { list-style: none; padding: 0; margin-top: var(--s3); display: grid; gap: var(--s3); }
+  .results :global(li) { padding: var(--s4) var(--s5); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); display: grid; gap: var(--s1); max-width: none; }
+  .results :global(a) { font-family: var(--font-head); font-weight: 600; font-size: var(--text-lg); color: var(--ink); text-decoration: none; }
+  .results :global(a:hover) { color: var(--primary); text-decoration: underline; }
+  .results :global(.tag) { font-size: 0.8125rem; font-weight: 700; color: var(--primary); }
+  .results :global(p) { color: var(--ink-soft); font-size: var(--text-sm); }
+  .results :global(mark) { background: var(--surface-teal); color: var(--ink); padding: 0 2px; border-radius: 3px; }
+</style>

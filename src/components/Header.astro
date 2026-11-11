@@ -1,6 +1,7 @@
 ---
 import Logo from './Logo.astro';
 import CrisisLink from './CrisisLink.astro';
+import Icon from './Icon.astro';
 import { nav } from '../lib/site';
 import { url } from '../lib/url';
 const current = Astro.url.pathname;
@@ -19,6 +20,7 @@ const isCurrent = (href: string) => current.startsWith(url(href));
     </nav>
 
     <div class="actions">
+      <a class="search-link" href={url('/search')} aria-label="Search Hausla"><Icon name="search" size={22} /></a>
       <CrisisLink />
       <details class="mobile" data-close-outside>
         <summary aria-label="Menu">
@@ -55,6 +57,9 @@ const isCurrent = (href: string) => current.startsWith(url(href));
   }
   .home { text-decoration: none; }
   .actions { display: flex; align-items: center; gap: var(--s2); }
+  @media (max-width: 26rem) { .actions { gap: 2px; } .bar { gap: var(--s2); } }
+  .search-link { width: 44px; height: 44px; display: grid; place-items: center; border-radius: var(--radius-sm); color: var(--ink-soft); }
+  .search-link:hover { background: var(--surface-sage); color: var(--ink); }
   ul { list-style: none; padding: 0; }
 
   .desktop { display: none; }

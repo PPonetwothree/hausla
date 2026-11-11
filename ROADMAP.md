@@ -40,7 +40,7 @@ unchecked item, finish it, update this file, commit.
       GTB, ESIC, RGCI Niti Bagh, Dharamshila Narayana, Action Cancer, major private hospitals.
       AIIMS pages block automated checks: verify AIIMS phone numbers by hand.
 - [ ] Helplines page
-- [ ] Pagefind search with filters
+- [x] Pagefind search with section filter: /search, header icon, homepage box (branch `site-search`)
 - [ ] Bookmarks (localStorage) and printable checklists
 - [ ] Installable PWA with offline handbooks
 
