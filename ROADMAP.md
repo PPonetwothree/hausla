@@ -11,7 +11,7 @@ unchecked item, finish it, update this file, commit.
 - [x] Components: Header, Footer, CrisisLink, Logo, Icon, Term, StartHere, GuideCard,
       StoryCard, SourceBadge, Disclosure
 - [x] Style tile at `/style-tile`, glossary at `/glossary`, holding homepage, friendly 404
-- [x] GitHub Pages deploy workflow
+- [x] GitHub Pages deploy workflow (Pages enabled, source: GitHub Actions)
 - [ ] **Founder review of the style tile** ← next
 - [ ] Apply style-tile feedback
 - [ ] Pages: About (anonymous founder note), Editorial policy, Sources & methods,
