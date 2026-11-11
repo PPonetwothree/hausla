@@ -23,7 +23,8 @@ unchecked item, finish it, update this file, commit.
 
 ## Phase 1 — Caregiver MVP (months 1–3)
 
-- [ ] Real homepage (Start here + human elements below the fold)
+- [x] Real homepage (Start here, helpline strip, note for caregivers, stories empty state,
+      what's coming, how we work)
 - [ ] Five Start-here path pages
 - [ ] Guides 1–3 (Understanding Cancer: The Basics; Processing the Diagnosis;
       Supporting a Loved One with Cancer) — summarised from official sources
@@ -64,4 +65,5 @@ unchecked item, finish it, update this file, commit.
 - 2026-11-11 — Phase 0 started. Project scaffolded; style tile, glossary, holding
   homepage and deploy workflow built. Style tile approved. Trust pages written
   (About, How we make Hausla, Disclaimer, Privacy); contact shows "being set up"
-  until an inbox exists.
+  until an inbox exists. Real homepage live; fixed dropped spaces site-wide
+  (compressHTML off). Next: "Coming to Delhi for treatment" handbook (needs web research).

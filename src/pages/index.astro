@@ -1,30 +1,205 @@
 ---
 import Base from '../layouts/Base.astro';
-import Logo from '../components/Logo.astro';
-import { site, crisis } from '../lib/site';
+import StartHere from '../components/StartHere.astro';
+import Icon from '../components/Icon.astro';
+import { crisis } from '../lib/site';
 import { url } from '../lib/url';
+
+/** Honest progress. Update `status` as each piece ships. */
+const coming = [
+  { title: 'Coming to Delhi for treatment', text: 'Registering at the OPD, places to stay near hospitals, and what to carry.', status: 'Writing now' },
+  { title: 'Hospitals in Delhi NCR', text: 'Cancer treatment centres, with phone numbers and the date we last checked them.', status: 'Next' },
+  { title: 'Help with treatment costs', text: 'Government schemes and charities, and how to apply.', status: 'Planned' },
+  { title: 'Seven guides', text: 'From understanding the basics to life during and after treatment.', status: 'Planned' },
+];
 ---
 <Base>
-  <section class="container section hold stack">
-    <Logo size="lg" />
-    <p class="lede">{site.tagline} <span class="hindi" lang="hi">{site.taglineHi}</span></p>
-    <p>
-      Hausla will be a free companion for families facing cancer in India: clear guides, verified hospitals and
-      financial help, and places to find support. We are building it carefully, one piece at a time.
-    </p>
-    <p><a class="btn btn-secondary" href={url('/style-tile')}>See the design system</a></p>
-    <div class="now card">
-      <p><strong>If you need to talk to someone now,</strong> these lines are free:</p>
-      <ul>
-        {crisis.lines.map((l) => <li>{l.name}: <a href={`tel:${l.tel}`}>{l.number}</a></li>)}
-      </ul>
+  <!-- 1. Arrival: reassurance + doors. Nothing else above the fold. -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text stack">
+        <h1>You don't have to figure this out alone.</h1>
+        <p class="lede">
+          Hausla is a free guide for families facing cancer in India. Start with one small step.
+        </p>
+      </div>
+      <div class="doors">
+        <h2 class="visually-hidden">Start here</h2>
+        <StartHere />
+      </div>
     </div>
+  </section>
+
+  <!-- 2. If today is hard -->
+  <section class="container hard reveal" aria-labelledby="hard-title">
+    <div class="hard-inner">
+      <span class="hard-icon"><Icon name="phone" size={22} /></span>
+      <div>
+        <h2 id="hard-title">If today feels too heavy</h2>
+        <p>
+          You can talk to someone right now, free:{' '}
+          {crisis.lines.map((l, i) => <>{i > 0 && ', or '}<a href={`tel:${l.tel}`}><strong>{l.number}</strong></a> ({l.name.split(' (')[0]})</>)}.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. A note for caregivers (our voice — not attributed to a real person) -->
+  <section class="container section note-wrap" aria-labelledby="note-title">
+    <div class="note reveal">
+      <p class="eyebrow note-eyebrow">A note for you</p>
+      <h2 id="note-title">If you're the one holding everything together</h2>
+      <div class="note-body">
+        <p>
+          You might be the one in the queue before sunrise, carrying the file of reports, translating what the doctor
+          said for the rest of the family, and quietly working out how to pay for it all.
+        </p>
+        <p>
+          It's a lot. You're allowed to not know things. You're allowed to be tired, and to ask for help. Looking after
+          yourself isn't selfish; it's part of looking after them.
+        </p>
+        <p>We built Hausla for you first. Take what helps today, and come back for the rest.</p>
+      </div>
+      <p class="sign">— Hausla</p>
+    </div>
+  </section>
+
+  <!-- 4. Stories: honest empty state until real, permitted stories are gathered -->
+  <section class="container section" aria-labelledby="stories-title">
+    <div class="split">
+      <div class="stack reveal">
+        <p class="eyebrow">Stories</p>
+        <h2 id="stories-title">From people who have been there</h2>
+        <p class="muted">
+          We're gathering real stories from patients, survivors and caregivers. Each one will be linked to the person
+          who wrote it, and nothing is shared without their permission.
+        </p>
+      </div>
+      <div class="stories-empty reveal" role="note">
+        <p>Stories will appear here soon.</p>
+        <p class="small">Have you written about your experience, or know someone who has? We'd love to hear from you once our contact form is ready.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. What's being built -->
+  <section class="container section" aria-labelledby="coming-title">
+    <div class="stack" style="--stack: var(--s3)">
+      <p class="eyebrow">Being built, piece by piece</p>
+      <h2 id="coming-title">What's coming to Hausla</h2>
+      <p class="muted">We publish each part only when it's ready and checked.</p>
+    </div>
+    <ul class="coming grid" role="list" style="--min: 15rem">
+      {coming.map((c) => (
+        <li class="card reveal">
+          <span class:list={['status', { now: c.status === 'Writing now' }]}>{c.status}</span>
+          <h3>{c.title}</h3>
+          <p class="small">{c.text}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- 6. How we work -->
+  <section class="container section" aria-labelledby="trust-title">
+    <div class="trust">
+      <h2 id="trust-title" class="visually-hidden">How Hausla works</h2>
+      <div class="trust-item reveal">
+        <Icon name="book" size={26} />
+        <h3>Sourced</h3>
+        <p class="small">Medical information is summarised from official sources like ICMR, Tata Memorial and the WHO, and every page shows where it came from.</p>
+      </div>
+      <div class="trust-item reveal">
+        <Icon name="check" size={26} />
+        <h3>Checked and dated</h3>
+        <p class="small">Every phone number and hospital listing shows the date we last checked it.</p>
+      </div>
+      <div class="trust-item reveal">
+        <Icon name="bookmark" size={26} />
+        <h3>Free and private</h3>
+        <p class="small">No sign-up, no ads, no tracking. No one pays to be listed.</p>
+      </div>
+    </div>
+    <p class="trust-link"><a href={url('/editorial-policy')}>How we make Hausla →</a></p>
   </section>
 </Base>
 
 <style>
-  .hold { --stack: var(--s5); padding-block: var(--s9); max-width: 46rem; }
-  .now { background: var(--surface-clay); border-color: transparent; }
-  .now ul { margin-top: var(--s2); padding-left: 1.2em; }
-  .now a { color: var(--clay-ink); font-weight: 700; }
+  /* Hero */
+  .hero { background: var(--surface-sage); border-bottom: 1px solid var(--line); }
+  .hero-inner { display: grid; gap: var(--s6); padding-block: var(--s7) var(--s7); }
+  .hero-text { --stack: var(--s4); }
+  .hero h1 { max-width: 16ch; }
+  @media (min-width: 64rem) {
+    .hero-inner { grid-template-columns: 0.85fr 1.15fr; align-items: center; padding-block: var(--s8); }
+    .doors :global(.start) { grid-template-columns: 1fr; }
+  }
+
+  /* If today is hard */
+  .hard { margin-top: var(--s6); }
+  .hard-inner {
+    display: flex;
+    gap: var(--s4);
+    align-items: flex-start;
+    padding: var(--s5);
+    border: 1.5px solid var(--clay);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+  .hard-icon { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--surface-clay); color: var(--clay-ink); }
+  .hard h2 { font-size: var(--text-lg); margin-bottom: var(--s1); }
+  .hard a { color: var(--clay-ink); }
+
+  /* Note */
+  .note {
+    max-width: 44rem;
+    margin-inline: auto;
+    padding: clamp(var(--s5), 5vw, var(--s7));
+    background: var(--surface-clay);
+    border-radius: calc(var(--radius) + 6px);
+    display: grid;
+    gap: var(--s4);
+  }
+  .note-eyebrow { color: var(--clay-ink); }
+  .note-body { display: grid; gap: var(--s3); font-size: var(--text-lg); }
+  .sign { font-family: var(--font-head); font-weight: 600; color: var(--clay-ink); }
+
+  /* Stories */
+  .split { display: grid; gap: var(--s5); align-items: center; }
+  .split .stack { --stack: var(--s3); }
+  .stories-empty {
+    padding: var(--s6) var(--s5);
+    border: 1.5px dashed var(--clay);
+    border-radius: var(--radius);
+    text-align: center;
+    color: var(--ink-soft);
+    display: grid;
+    gap: var(--s2);
+    justify-items: center;
+  }
+  .stories-empty p:first-child { font-family: var(--font-head); font-weight: 600; color: var(--clay-ink); font-size: var(--text-lg); }
+  @media (min-width: 56rem) { .split { grid-template-columns: 1fr 1fr; } }
+
+  /* Coming */
+  .coming { list-style: none; padding: 0; margin-top: var(--s5); }
+  .coming li { display: grid; gap: var(--s2); align-content: start; max-width: none; }
+  .coming h3 { font-size: var(--text-lg); }
+  .coming p { color: var(--ink-soft); }
+  .status {
+    justify-self: start;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    padding: 2px var(--s3);
+    border-radius: var(--radius-pill);
+    background: var(--surface-blue);
+    color: var(--info);
+  }
+  .status.now { background: var(--surface-teal); color: var(--primary-hover); }
+
+  /* Trust */
+  .trust { display: grid; gap: var(--s5); grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
+  .trust-item { display: grid; align-content: start; gap: var(--s2); color: var(--primary); }
+  .trust-item h3 { color: var(--ink); font-size: var(--text-lg); }
+  .trust-item p { color: var(--ink-soft); }
+  .trust-link { margin-top: var(--s5); font-weight: 600; }
 </style>

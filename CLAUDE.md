@@ -61,7 +61,8 @@ of every session and update it at the end.
 - Every text colour must pass WCAG AA (4.5:1) on `--bg`. `--clay` is decorative only.
 - Touch targets ≥ 44px. Motion ≤ 300ms, and off under `prefers-reduced-motion`.
 - Content is visible without JavaScript; JS only enhances.
-- In `.astro` markup, don't start a line with `<Term>` after text on the previous
-  line — Astro drops the space. Keep the space on the same line.
+- `compressHTML` is off in `astro.config.mjs` because it dropped the space before
+  inline tags that start a new line ("our<a>"). Don't turn it back on without
+  checking the built HTML for that.
 - Crisis numbers live in `src/lib/site.ts` (`crisis`); re-verify before releases.
 - Commands: `npm run dev`, `npm run build`, `npm run preview`.
