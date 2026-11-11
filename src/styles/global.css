@@ -301,6 +301,12 @@ a:hover {
 .prose strong {
   font-weight: 700;
 }
+.prose blockquote {
+  padding: var(--s4) var(--s5);
+  border-left: 4px solid var(--clay);
+  border-radius: var(--radius-sm);
+  background: var(--surface-clay);
+}
 .prose .callout {
   padding: var(--s4) var(--s5);
   border-radius: var(--radius);

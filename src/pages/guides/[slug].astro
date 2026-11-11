@@ -19,7 +19,10 @@ const { Content, headings } = await render(guide);
 const d = guide.data;
 const toc = headings.filter((h) => h.depth === 2);
 const fmt = (dt: Date) => dt.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
-const related = d.related.map((r) => relatedPages[r] ?? { title: r, href: `/guides/${r}` });
+const allGuides = await getCollection('guides');
+const related = d.related
+  .map((r) => relatedPages[r] ?? (() => { const g = allGuides.find((x) => x.id === r); return g ? { title: g.data.title, href: `/guides/${g.id}` } : null; })())
+  .filter((r): r is { title: string; href: string } => r !== null);
 ---
 <Base title={d.title} description={d.summary}>
   <article class="container page">
