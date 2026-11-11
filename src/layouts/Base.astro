@@ -40,6 +40,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <Footer />
 
     <script>
+      import { setupTerms } from '../scripts/terms';
+      setupTerms();
+
       // Soft reveal as content scrolls into view (CSS disables it under reduced motion).
       const els = document.querySelectorAll('.reveal');
       if ('IntersectionObserver' in window) {
