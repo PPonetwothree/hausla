@@ -1,0 +1,15 @@
+---
+import { getCollection } from 'astro:content';
+import HubPage from '../../layouts/HubPage.astro';
+import Hub from '../../components/Hub.astro';
+import { guidePlan } from '../../lib/guides';
+
+const published = await getCollection('guides');
+const items = guidePlan.map((g) => {
+  const entry = published.find((p) => p.data.order === g.order);
+  return { title: g.title, text: entry?.data.summary ?? g.text, href: entry ? `/guides/${entry.id}` : undefined };
+});
+---
+<HubPage title="Guides" eyebrow="Guides" lede="Seven plain-language guides, each summarised from official and medical sources, with every source listed. We publish each one only when it's checked.">
+  <Hub items={items} />
+</HubPage>

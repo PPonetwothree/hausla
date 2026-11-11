@@ -27,8 +27,8 @@ unchecked item, finish it, update this file, commit.
       what's coming, how we work)
 - [x] Five Start-here path pages + /start index (branch `start-paths`)
 - [x] Hub pages for Learn, Guides, Support so no menu item 404s (branch `start-paths`)
-- [ ] Guides 1–3 (Understanding Cancer: The Basics; Processing the Diagnosis;
-      Supporting a Loved One with Cancer) — summarised from official sources
+- [x] Guide 6: Supporting a Loved One with Cancer (from NCI 'Caring for the Caregiver', 2024)
+- [ ] Guides 1–2 (Understanding Cancer: The Basics; Processing the Diagnosis) — summarised from official sources
 - [x] Handbook draft: Coming to Delhi for treatment — on branch `handbook-coming-to-delhi`,
       awaiting founder review. Open items: DUSIB helpline and ORS details not yet confirmed
       from official sites (TLS errors from the sandbox); Vishram Sadan charges conflict between sources.
@@ -84,3 +84,5 @@ unchecked item, finish it, update this file, commit.
   directory, Find care, financial help). Then built Start-here paths + Learn/Guides/Support hubs
   on branch `start-paths`. State schemes (UP/Bihar/Haryana) deferred: official sources need
   hosts cms.neva.gov.in, SACHIS, Bihar health — only blogs/news found so far.
+- (session 3) Guides infrastructure (collection, template, base-link plugin) + guide 6 on branch
+  `guide-caregivers`. Pinned astro 7.4.4 and markdown-remark 7.3.5 (≥2 weeks old).

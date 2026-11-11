@@ -1,11 +1,11 @@
 import { defineCollection } from 'astro:content';
-import { file } from 'astro/loaders';
+import { file, glob } from 'astro/loaders';
 import { glossarySchema } from './schemas/glossary';
 import { hospitalSchema } from './schemas/hospital';
+import { guideSchema } from './schemas/guide';
 
 // Collections are registered as their content arrives, so empty ones don't
 // produce build warnings. Schemas ready to register:
-//   guides    -> ./schemas/guide.ts     (glob 'src/content/guides/*.md')
 //   stories   -> ./schemas/story.ts     (file 'src/data/stories.yaml')
 
 const glossary = defineCollection({
@@ -18,4 +18,9 @@ const hospitals = defineCollection({
   schema: hospitalSchema,
 });
 
-export const collections = { glossary, hospitals };
+const guides = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/guides' }),
+  schema: guideSchema,
+});
+
+export const collections = { glossary, hospitals, guides };

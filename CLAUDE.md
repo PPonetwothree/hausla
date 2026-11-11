@@ -64,5 +64,9 @@ of every session and update it at the end.
 - `compressHTML` is off in `astro.config.mjs` because it dropped the space before
   inline tags that start a new line ("our<a>"). Don't turn it back on without
   checking the built HTML for that.
+- Guides are Markdown in `src/content/guides/`. Write internal links as `/find-care/...`;
+  `src/lib/rehype-base-links.mjs` adds the `/hausla` base. Guide order/titles: `src/lib/guides.ts`.
+- **Dependencies:** pin exact versions (`npm i -E`) released at least two weeks ago.
+  Astro 7's default Markdown processor needs `@astrojs/markdown-remark` for rehype plugins.
 - Crisis numbers live in `src/lib/site.ts` (`crisis`); re-verify before releases.
 - Commands: `npm run dev`, `npm run build`, `npm run preview`.

@@ -1,0 +1,111 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import SourceBadge from '../../components/SourceBadge.astro';
+import { crisis } from '../../lib/site';
+import { relatedPages } from '../../lib/guides';
+import { url } from '../../lib/url';
+
+export async function getStaticPaths() {
+  const guides = (await getCollection('guides')).sort((a, b) => a.data.order - b.data.order);
+  return guides.map((g, i) => ({
+    params: { slug: g.id },
+    props: { guide: g, prev: guides[i - 1], next: guides[i + 1] },
+  }));
+}
+interface Props { guide: CollectionEntry<'guides'>; prev?: CollectionEntry<'guides'>; next?: CollectionEntry<'guides'> }
+const { guide, prev, next } = Astro.props;
+const { Content, headings } = await render(guide);
+const d = guide.data;
+const toc = headings.filter((h) => h.depth === 2);
+const fmt = (dt: Date) => dt.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+const related = d.related.map((r) => relatedPages[r] ?? { title: r, href: `/guides/${r}` });
+---
+<Base title={d.title} description={d.summary}>
+  <article class="container page">
+    <header class="head stack">
+      <p class="eyebrow"><a href={url('/guides')}>Guide {d.order} of 7</a></p>
+      <h1>{d.title}</h1>
+      <p class="lede">{d.summary}</p>
+      <p class="small muted">{d.readingMinutes} min read · You can read it in parts.</p>
+      <SourceBadge
+        status={d.review.status}
+        sources={d.sources.map((s) => s.publisher.split(',')[0])}
+        lastChecked={d.review.lastChecked.toISOString().slice(0, 10)}
+        reviewer={d.review.reviewer}
+      />
+    </header>
+
+    <div class="body">
+      {toc.length > 0 && (
+        <nav class="toc" aria-label="In this guide">
+          <p class="eyebrow">In this guide</p>
+          <ol>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+        </nav>
+      )}
+      <div class="prose guide-text">
+        <Content />
+
+        <aside class="callout warm help">
+          <p>
+            <strong>Need to talk to someone?</strong> Free, any time:
+            {crisis.lines.map((l, i) => <>{i > 0 && ', or '}<a href={`tel:${l.tel}`}><strong>{l.number}</strong></a> ({l.name.split(' (')[0]})</>)}.
+          </p>
+        </aside>
+
+        {related.length > 0 && (
+          <section aria-labelledby="related">
+            <h2 id="related">Related</h2>
+            <ul>{related.map((r) => <li><a href={url(r.href)}>{r.title}</a></li>)}</ul>
+          </section>
+        )}
+
+        <section aria-labelledby="sources">
+          <h2 id="sources">Sources</h2>
+          <p class="small muted">
+            This guide summarises the sources below, adapted for families in India. It is information, not medical advice.
+            See <a href={url('/editorial-policy')}>how we make Hausla</a>.
+          </p>
+          <ol class="small sources">
+            {d.sources.map((s) => (
+              <li>
+                <a href={s.url} rel="noopener">{s.title}</a>. {s.publisher}{s.published && <>, {fmt(s.published)}</>}. Accessed {fmt(s.accessed)}.
+              </li>
+            ))}
+          </ol>
+        </section>
+      </div>
+    </div>
+
+    <nav class="pager" aria-label="More guides">
+      {prev ? <a href={url(`/guides/${prev.id}`)} class="prev"><span class="small muted">Previous guide</span>{prev.data.title}</a> : <span />}
+      {next ? <a href={url(`/guides/${next.id}`)} class="next"><span class="small muted">Next guide</span>{next.data.title}</a> : <a href={url('/guides')} class="next"><span class="small muted">All guides</span>See all seven guides</a>}
+    </nav>
+  </article>
+</Base>
+
+<style>
+  .page { padding-block: var(--s8) var(--s6); }
+  .head { --stack: var(--s4); max-width: 46rem; margin-bottom: var(--s7); }
+  .head .eyebrow a { color: inherit; text-decoration: none; }
+  .head .eyebrow a:hover { text-decoration: underline; }
+  .body { display: grid; gap: var(--s6); }
+  .toc { align-self: start; padding: var(--s4) var(--s5); border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+  .toc ol { margin-top: var(--s2); padding-left: 1.2em; font-size: var(--text-sm); display: grid; gap: var(--s2); }
+  .toc a { color: var(--ink-soft); text-decoration: none; }
+  .toc a:hover { color: var(--primary); text-decoration: underline; }
+  .help { margin-top: var(--s7); }
+  .sources { padding-left: 1.25em; }
+  .sources li { overflow-wrap: anywhere; }
+  .pager { display: grid; gap: var(--s3); margin-top: var(--s7); max-width: 46rem; }
+  .pager a { display: grid; gap: var(--s1); padding: var(--s4) var(--s5); border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: var(--ink); text-decoration: none; font-family: var(--font-head); font-weight: 600; }
+  .pager a:hover { border-color: var(--primary); }
+  .pager .next { text-align: right; }
+  @media (min-width: 40rem) { .pager { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 64rem) {
+    .body { grid-template-columns: 1fr 15rem; align-items: start; }
+    .toc { grid-column: 2; grid-row: 1; position: sticky; top: 96px; }
+    .prose { grid-column: 1; grid-row: 1; }
+  }
+  .guide-text :global(h2) { scroll-margin-top: 90px; }
+</style>
