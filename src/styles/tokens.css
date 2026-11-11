@@ -1,0 +1,72 @@
+/*
+ * Hausla design tokens — v0.1
+ * Every text colour here is checked against WCAG AA (4.5:1) on --bg.
+ * Decorative-only colours are marked and must never carry text.
+ */
+:root {
+  /* Surfaces */
+  --bg: #faf7f2;            /* warm white page */
+  --surface: #fffdf9;       /* cards */
+  --surface-sage: #eef2ec;
+  --surface-teal: #dcebe7;
+  --surface-blue: #e8eff5;
+  --surface-clay: #f6ebe4;  /* story / human moments */
+  --line: #e4ddd2;
+  --line-strong: #cfc6b8;
+
+  /* Text */
+  --ink: #26332f;           /* 12.3:1 on bg */
+  --ink-soft: #4a5753;      /* 7.1:1 */
+  --muted: #5f6b67;         /* 5.2:1 */
+
+  /* Actions */
+  --primary: #4f6f5c;       /* sage, 5.2:1; white on it 5.6:1 */
+  --primary-hover: #456453;
+  --primary-ink: #ffffff;
+  --info: #2f6577;          /* soft-blue family, 6.0:1 */
+
+  /* The human colour: appears wherever a real person speaks */
+  --clay: #c4876a;          /* decorative only (2.8:1) — borders, marks */
+  --clay-ink: #8e4f33;      /* text, 5.9:1 */
+
+  --focus: #2f6577;
+
+  /* Type */
+  --font-body: 'Atkinson Hyperlegible Next Variable', 'Mukta', system-ui, sans-serif;
+  --font-head: 'Hanken Grotesk Variable', 'Mukta', system-ui, sans-serif;
+  --font-hindi: 'Mukta', 'Atkinson Hyperlegible Next Variable', sans-serif;
+
+  --text-sm: 0.9375rem;     /* 15px */
+  --text-base: 1.125rem;    /* 18px: generous for tired eyes */
+  --text-lg: 1.25rem;
+  --text-xl: clamp(1.375rem, 1.2rem + 0.8vw, 1.625rem);
+  --text-2xl: clamp(1.625rem, 1.35rem + 1.3vw, 2.125rem);
+  --text-3xl: clamp(2rem, 1.5rem + 2.4vw, 3rem);
+
+  --leading: 1.65;
+  --leading-tight: 1.2;
+  --measure: 66ch;
+
+  /* Space (4px base) */
+  --s1: 0.25rem;
+  --s2: 0.5rem;
+  --s3: 0.75rem;
+  --s4: 1rem;
+  --s5: 1.5rem;
+  --s6: 2rem;
+  --s7: 3rem;
+  --s8: 4.5rem;
+  --s9: 6rem;
+
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-pill: 999px;
+
+  --page-max: 72rem;
+  --gutter: clamp(1rem, 0.6rem + 2vw, 2rem);
+
+  /* Motion: soft and short. Disabled entirely under reduced motion. */
+  --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --dur-fast: 150ms;
+  --dur: 280ms;
+}

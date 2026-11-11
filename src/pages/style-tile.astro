@@ -1,0 +1,284 @@
+---
+import Base from '../layouts/Base.astro';
+import Logo from '../components/Logo.astro';
+import Icon from '../components/Icon.astro';
+import Term from '../components/Term.astro';
+import StartHere from '../components/StartHere.astro';
+import GuideCard from '../components/GuideCard.astro';
+import StoryCard from '../components/StoryCard.astro';
+import SourceBadge from '../components/SourceBadge.astro';
+import Disclosure from '../components/Disclosure.astro';
+import { site } from '../lib/site';
+
+const colours = [
+  { group: 'Surfaces', items: [
+    { name: 'Warm white', token: '--bg', hex: '#FAF7F2', role: 'Page background' },
+    { name: 'Card', token: '--surface', hex: '#FFFDF9', role: 'Cards, panels' },
+    { name: 'Sage mist', token: '--surface-sage', hex: '#EEF2EC', role: 'Footer, hover' },
+    { name: 'Pale teal', token: '--surface-teal', hex: '#DCEBE7', role: 'Icons, highlights' },
+    { name: 'Soft blue', token: '--surface-blue', hex: '#E8EFF5', role: 'Information' },
+    { name: 'Clay mist', token: '--surface-clay', hex: '#F6EBE4', role: 'Human stories' },
+  ]},
+  { group: 'Text & action', items: [
+    { name: 'Ink', token: '--ink', hex: '#26332F', role: 'Body text', ratio: '12.3:1' },
+    { name: 'Ink soft', token: '--ink-soft', hex: '#4A5753', role: 'Secondary text', ratio: '7.1:1' },
+    { name: 'Muted', token: '--muted', hex: '#5F6B67', role: 'Captions, meta', ratio: '5.2:1' },
+    { name: 'Sage', token: '--primary', hex: '#4F6F5C', role: 'Buttons, links', ratio: '5.2:1' },
+    { name: 'Clay', token: '--clay-ink', hex: '#8E4F33', role: 'A real person speaking', ratio: '5.9:1' },
+    { name: 'Deep blue', token: '--info', hex: '#2F6577', role: 'Info, focus ring', ratio: '6.0:1' },
+  ]},
+];
+
+const guides = [
+  { title: 'Understanding Cancer: The Basics', summary: 'What cancer is, how it grows, and what words like stage and grade mean.', minutes: 12 },
+  { title: 'Processing the Diagnosis', summary: 'The first days and weeks: what you might feel, and what can wait.', minutes: 9 },
+  { title: 'Supporting a Loved One with Cancer', summary: 'Practical and emotional help for caregivers, including caring for yourself.', minutes: 14 },
+];
+---
+<Base title="Design system" description="The Hausla style tile: colours, type, components and voice." noindex>
+  <div class="container">
+
+    <header class="section intro stack">
+      <p class="eyebrow">Design system · v0.1 · for review</p>
+      <h1>Hausla style tile</h1>
+      <p class="lede">
+        Every colour, font and building block the site will use, on one page. Nothing here is real content yet.
+        Try it on your phone: tap things, open things, resize the window.
+      </p>
+    </header>
+
+    <!-- Identity -->
+    <section class="section stack" aria-labelledby="identity">
+      <p class="eyebrow">01</p>
+      <h2 id="identity">Name &amp; voice</h2>
+      <div class="identity">
+        <div class="wordmark card">
+          <Logo size="lg" />
+          <p class="tag">{site.tagline}</p>
+          <p class="tag hindi" lang="hi">{site.taglineHi}</p>
+          <p class="small muted">The mark: a path rising towards a small sun. The path is walked one step at a time.</p>
+        </div>
+        <div class="voice">
+          <h3>A warm companion</h3>
+          <p>We sound like a calm friend who has been through it and done the reading. Honest, never falsely cheerful.</p>
+          <table>
+            <caption class="visually-hidden">Voice examples</caption>
+            <thead><tr><th scope="col">We say</th><th scope="col">We avoid</th></tr></thead>
+            <tbody>
+              <tr><td>“You don't have to read all of this today.”</td><td>“Everything you need to know about cancer!”</td></tr>
+              <tr><td>“Many people feel this way. It's allowed.”</td><td>“Stay positive and you'll beat this.”</td></tr>
+              <tr><td>“Ask your oncologist whether this applies to you.”</td><td>“This treatment is best for you.”</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Colour -->
+    <section class="section stack" aria-labelledby="colour">
+      <p class="eyebrow">02</p>
+      <h2 id="colour">Colour</h2>
+      <p class="muted">Muted and warm, for long reading. Every text colour passes WCAG AA contrast (4.5:1 or more) on the page background. Clay appears only where a real person speaks.</p>
+      {colours.map((g) => (
+        <div class="stack" style="--stack: var(--s3)">
+          <h3 class="h-sm">{g.group}</h3>
+          <ul class="swatches" role="list">
+            {g.items.map((c) => (
+              <li class="swatch">
+                <span class="chip" style={`background:${c.hex}`}></span>
+                <span class="sw-name">{c.name}</span>
+                <code>{c.hex}</code>
+                <span class="sw-role small">{c.role}{'ratio' in c && <> · <strong>{c.ratio}</strong></>}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </section>
+
+    <!-- Type -->
+    <section class="section stack" aria-labelledby="type">
+      <p class="eyebrow">03</p>
+      <h2 id="type">Typography</h2>
+      <div class="type-grid">
+        <div class="type-spec card">
+          <p class="small muted">Headings · Hanken Grotesk</p>
+          <p class="specimen-head">Aa</p>
+          <p class="t1">One step at a time</p>
+          <p class="t2">What happens at your first hospital visit</p>
+          <p class="t3">Questions to ask your oncologist</p>
+        </div>
+        <div class="type-spec card">
+          <p class="small muted">Body · Atkinson Hyperlegible Next</p>
+          <p class="specimen-body">Aa</p>
+          <p>Designed by the Braille Institute so every letter is easy to tell apart (Il1 O0 rn m), which helps when you're tired, worried or on medication. Body text is 18px with relaxed line spacing.</p>
+        </div>
+        <div class="type-spec card">
+          <p class="small muted">Hindi · Mukta</p>
+          <p class="specimen-hindi hindi" lang="hi">अ आ</p>
+          <p class="hindi" lang="hi">आप अकेले नहीं हैं। एक-एक कदम करके, हम साथ चलेंगे।</p>
+          <p class="small muted">“You are not alone. One step at a time, we'll walk together.”</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Words with meanings -->
+    <section class="section stack" aria-labelledby="terms">
+      <p class="eyebrow">04</p>
+      <h2 id="terms">Words with meanings</h2>
+      <p class="muted">Hover on a computer, tap on a phone, or Tab to it with a keyboard. Only the first use on a page is underlined.</p>
+      <div class="card prose">
+        <p>
+          Many families travelling to Delhi stay at a <Term id="dharamshala">dharamshala</Term> near the hospital.
+          On the first morning, you'll usually queue at the <Term id="opd">OPD</Term> to register and receive a <Term id="parchi">parchi</Term>.
+          Keep it safe. Later, the <Term id="oncologist">oncologist</Term> may ask for a <Term id="biopsy">biopsy</Term> to confirm the diagnosis.
+          And when the queue is long, a little <Term id="hausla">hausla</Term> goes a long way.
+          The second time we mention the <Term id="opd">OPD</Term>, it isn't underlined.
+        </p>
+      </div>
+    </section>
+
+    <!-- Start here -->
+    <section class="section stack" aria-labelledby="start">
+      <p class="eyebrow">05 · Homepage</p>
+      <h2 id="start">Start here</h2>
+      <p class="muted">The first thing on the homepage. Five doors, chosen by situation, not by topic. The caregiver path leads because caregivers are our first audience.</p>
+      <div class="start-demo">
+        <h3 class="welcome">What brings you here today?</h3>
+        <p class="lede">Whatever you're facing, start with one small step.</p>
+        <StartHere />
+      </div>
+    </section>
+
+    <!-- Buttons & search -->
+    <section class="section stack" aria-labelledby="controls">
+      <p class="eyebrow">06</p>
+      <h2 id="controls">Buttons, links &amp; search</h2>
+      <div class="row">
+        <a class="btn btn-primary" href="#controls">Find financial help</a>
+        <a class="btn btn-secondary" href="#controls">See hospitals near Delhi</a>
+        <button class="btn btn-quiet" type="button"><Icon name="bookmark" size={18} /> Save for later</button>
+      </div>
+      <p>Links in text look <a href="#controls">like this</a>: calm, underlined, and easy to spot.</p>
+      <form class="search" role="search" onsubmit="return false">
+        <div class="field">
+          <label for="demo-search">Search Hausla</label>
+          <div class="search-box">
+            <Icon name="search" size={20} />
+            <input id="demo-search" class="input" type="search" placeholder="Try: chemotherapy, AIIMS, Ayushman Bharat" />
+          </div>
+          <p class="small muted">Search arrives in Phase 1. Filters will cover cancer type, location and kind of resource.</p>
+        </div>
+      </form>
+    </section>
+
+    <!-- Guides -->
+    <section class="section stack" aria-labelledby="guides">
+      <p class="eyebrow">07</p>
+      <h2 id="guides">Guide cards</h2>
+      <div class="grid" style="--min: 17rem">
+        {guides.map((g, i) => (
+          <GuideCard number={i + 1} title={g.title} summary={g.summary} minutes={g.minutes} href={`/guides/${i + 1}`} />
+        ))}
+      </div>
+    </section>
+
+    <!-- Stories -->
+    <section class="section stack" aria-labelledby="stories">
+      <p class="eyebrow">08 · The human colour</p>
+      <h2 id="stories">Story cards</h2>
+      <p class="muted">Real stories will link to the original writer. Our own one-line summary, a short attributed quote, and nothing copied without permission.</p>
+      <div class="grid" style="--min: 18rem">
+        <StoryCard sample quote="Nobody told me the waiting would be the hardest part. So I'm telling you." author="A caregiver" perspective="Caring for her father" summary="On the long days between tests, and the small routines that helped." href="#stories" publisher="the original site" />
+        <StoryCard sample quote="I stopped asking ‘why me’ and started asking ‘what's next’. Some days I still ask both." author="A survivor" perspective="Five years after treatment" summary="An honest look at life after treatment: the relief and the fear that both stay." href="#stories" publisher="the original site" />
+      </div>
+    </section>
+
+    <!-- Trust -->
+    <section class="section stack" aria-labelledby="trust">
+      <p class="eyebrow">09 · Trust</p>
+      <h2 id="trust">Sources &amp; review status</h2>
+      <p class="muted">Shown at the top of every medical page. Honest about what has and hasn't been reviewed.</p>
+      <SourceBadge status="summarised" sources={['ICMR-NCDIR', 'Tata Memorial Centre']} lastChecked="2026-11-11" />
+      <SourceBadge status="medically-reviewed" sources={[]} reviewer="an oncology nurse (example)" lastChecked="2026-11-11" />
+    </section>
+
+    <!-- Disclosure -->
+    <section class="section stack" aria-labelledby="disclosure">
+      <p class="eyebrow">10</p>
+      <h2 id="disclosure">Expandable sections</h2>
+      <p class="muted">Short introduction first; detail only when someone is ready for it.</p>
+      <div class="prose">
+        <Disclosure title="What should I bring to the first hospital visit?">
+          <p>A list will live here: ID proof, earlier reports and scans, a list of current medicines, and a notebook for questions.</p>
+        </Disclosure>
+        <Disclosure title="Do I need to understand all of this today?">
+          <p>No. Most families take in information slowly, over weeks. Read what helps today, and come back later.</p>
+        </Disclosure>
+      </div>
+    </section>
+
+    <!-- Motion -->
+    <section class="section stack" aria-labelledby="motion">
+      <p class="eyebrow">11</p>
+      <h2 id="motion">Motion</h2>
+      <p>Soft fades and gentle rises, under 300 milliseconds. Nothing moves while you're reading, nothing loops, and everything switches off if your device is set to reduce motion.</p>
+      <div class="grid motion-demo" style="--min: 10rem">
+        {['Fade', 'Rise', 'Settle'].map((m) => <div class="card reveal center">{m}</div>)}
+      </div>
+    </section>
+
+  </div>
+</Base>
+
+<style>
+  .intro { --stack: var(--s4); padding-top: var(--s8); }
+  .section { --stack: var(--s5); }
+  .h-sm { font-size: var(--text-base); color: var(--ink-soft); }
+  .prose { max-width: 46rem; }
+
+  /* Identity */
+  .identity { display: grid; gap: var(--s5); }
+  .wordmark { display: grid; gap: var(--s3); padding: var(--s6); }
+  .tag { font-family: var(--font-head); font-size: var(--text-xl); color: var(--ink-soft); }
+  .tag.hindi { font-family: var(--font-hindi); font-size: var(--text-lg); }
+  .voice { display: grid; gap: var(--s3); align-content: start; }
+  table { border-collapse: collapse; width: 100%; font-size: var(--text-sm); margin-top: var(--s2); }
+  th { text-align: left; font-family: var(--font-head); padding: var(--s2) var(--s3); border-bottom: 2px solid var(--line-strong); }
+  td { padding: var(--s3); border-bottom: 1px solid var(--line); vertical-align: top; }
+  td:first-child { color: var(--primary); }
+  td:last-child { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--clay); }
+  @media (min-width: 56rem) { .identity { grid-template-columns: 1fr 1.2fr; } }
+
+  /* Colour */
+  .swatches { list-style: none; padding: 0; display: grid; gap: var(--s3); grid-template-columns: repeat(auto-fill, minmax(min(100%, 10.5rem), 1fr)); }
+  .swatch { display: grid; gap: 2px; max-width: none; }
+  .chip { height: 72px; border-radius: var(--radius-sm); border: 1px solid rgb(38 51 47 / 0.1); margin-bottom: var(--s2); }
+  .sw-name { font-family: var(--font-head); font-weight: 600; }
+  code { font-size: var(--text-sm); color: var(--muted); }
+  .sw-role { color: var(--ink-soft); line-height: 1.4; }
+
+  /* Type */
+  .type-grid { display: grid; gap: var(--s4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); }
+  .type-spec { display: grid; gap: var(--s3); align-content: start; }
+  .specimen-head, .specimen-body, .specimen-hindi { font-size: 4rem; line-height: 1; color: var(--primary); }
+  .specimen-head { font-family: var(--font-head); font-weight: 600; }
+  .specimen-body { font-family: var(--font-body); }
+  .specimen-hindi { font-family: var(--font-hindi); line-height: 1.2; }
+  .t1 { font-family: var(--font-head); font-weight: 600; font-size: var(--text-2xl); line-height: 1.2; letter-spacing: -0.02em; }
+  .t2 { font-family: var(--font-head); font-weight: 600; font-size: var(--text-xl); line-height: 1.25; }
+  .t3 { font-family: var(--font-head); font-weight: 600; font-size: var(--text-lg); }
+
+  /* Start here */
+  .start-demo { background: var(--surface-sage); border-radius: calc(var(--radius) + 6px); padding: clamp(var(--s5), 4vw, var(--s7)); display: grid; gap: var(--s4); }
+  .welcome { font-size: var(--text-2xl); }
+
+  /* Controls */
+  .row { display: flex; flex-wrap: wrap; gap: var(--s3); }
+  .search { max-width: 40rem; }
+  .search-box { position: relative; }
+  .search-box :global(svg) { position: absolute; left: var(--s4); top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+  .search-box .input { padding-left: 3rem; }
+
+  .motion-demo .center { text-align: center; font-family: var(--font-head); font-weight: 600; color: var(--primary); }
+</style>

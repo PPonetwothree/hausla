@@ -1,0 +1,107 @@
+---
+import Logo from './Logo.astro';
+import CrisisLink from './CrisisLink.astro';
+import { nav } from '../lib/site';
+import { url } from '../lib/url';
+const current = Astro.url.pathname;
+const isCurrent = (href: string) => current.startsWith(url(href));
+---
+<header class="site-header">
+  <div class="container bar">
+    <a href={url('/')} class="home" aria-label="Hausla home"><Logo /></a>
+
+    <nav class="desktop" aria-label="Main">
+      <ul>
+        {nav.map((n) => (
+          <li><a href={url(n.href)} aria-current={isCurrent(n.href) ? 'page' : undefined}>{n.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="actions">
+      <CrisisLink />
+      <details class="mobile" data-close-outside>
+        <summary aria-label="Menu">
+          <span class="bars" aria-hidden="true"><i></i><i></i></span>
+          <span class="visually-hidden">Menu</span>
+        </summary>
+        <nav aria-label="Main (mobile)">
+          <ul>
+            {nav.map((n) => (
+              <li><a href={url(n.href)} aria-current={isCurrent(n.href) ? 'page' : undefined}>{n.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    backdrop-filter: saturate(1.2) blur(6px);
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s4);
+    min-height: 68px;
+  }
+  .home { text-decoration: none; }
+  .actions { display: flex; align-items: center; gap: var(--s2); }
+  ul { list-style: none; padding: 0; }
+
+  .desktop { display: none; }
+  .desktop ul { display: flex; gap: var(--s1); }
+  .desktop a, .mobile a {
+    display: block;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-family: var(--font-head);
+    font-weight: 500;
+    padding: var(--s2) var(--s3);
+    border-radius: var(--radius-sm);
+  }
+  .desktop a:hover, .mobile a:hover { color: var(--ink); background: var(--surface-sage); }
+  a[aria-current='page'] { color: var(--primary); box-shadow: inset 0 -2px 0 var(--primary); }
+
+  .mobile { position: relative; }
+  .mobile summary {
+    list-style: none;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+  .mobile summary::-webkit-details-marker { display: none; }
+  .mobile summary:hover { background: var(--surface-sage); }
+  .bars { display: grid; gap: 6px; }
+  .bars i { display: block; width: 20px; height: 2px; background: var(--ink); border-radius: 2px; transition: transform var(--dur) var(--ease); }
+  .mobile[open] .bars i:first-child { transform: translateY(4px) rotate(45deg); }
+  .mobile[open] .bars i:last-child { transform: translateY(-4px) rotate(-45deg); }
+  .mobile nav {
+    position: absolute;
+    right: 0;
+    top: calc(100% + var(--s2));
+    width: min(18rem, calc(100vw - 2 * var(--gutter)));
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: var(--s2);
+    box-shadow: 0 12px 32px -16px rgb(38 51 47 / 0.25);
+  }
+  .mobile a { font-size: var(--text-lg); padding: var(--s3) var(--s4); }
+
+  @media (min-width: 60rem) {
+    .desktop { display: block; }
+    .mobile { display: none; }
+  }
+</style>

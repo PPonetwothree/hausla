@@ -1,0 +1,30 @@
+---
+/** Hausla wordmark: a path rising towards a small sun. */
+interface Props { size?: 'sm' | 'md' | 'lg' }
+const { size = 'md' } = Astro.props;
+---
+<span class={`logo logo-${size}`}>
+  <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+    <path d="M4 26c5 0 7-3 9.5-7.5S19 10 25 10" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" />
+    <circle cx="25" cy="5.5" r="2.6" fill="var(--clay)" />
+  </svg>
+  <span class="word">Hausla</span>
+</span>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    color: var(--primary);
+    font-family: var(--font-head);
+    font-weight: 650;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  .word { color: var(--ink); }
+  svg { width: 1.15em; height: 1.15em; }
+  .logo-sm { font-size: 1.25rem; }
+  .logo-md { font-size: 1.5rem; }
+  .logo-lg { font-size: clamp(2.5rem, 2rem + 3vw, 4rem); }
+</style>

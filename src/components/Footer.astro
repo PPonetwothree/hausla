@@ -1,0 +1,47 @@
+---
+import Logo from './Logo.astro';
+import { site } from '../lib/site';
+import { url } from '../lib/url';
+---
+<footer class="site-footer">
+  <div class="container inner">
+    <div class="brand stack">
+      <Logo size="sm" />
+      <p>{site.tagline} <span class="hindi" lang="hi">{site.taglineHi}</span></p>
+      <p class="small muted">Free to use, always. No sign-up, no ads, no tracking.</p>
+    </div>
+
+    <div class="disclaimer">
+      <h2 class="eyebrow">Please read</h2>
+      <p class="small">
+        Hausla shares information to help you understand cancer and find your way through care in India.
+        It is <strong>not medical advice</strong> and cannot diagnose or recommend treatment.
+        Always talk to your doctor before making decisions about your health or treatment.
+      </p>
+    </div>
+
+    <nav class="links" aria-label="About Hausla">
+      <ul>
+        <li><a href={url('/glossary')}>Glossary</a></li>
+        <li><a href={url('/style-tile')}>Design system</a></li>
+      </ul>
+      <p class="small muted">Editorial policy, sources &amp; methods, privacy and error reporting arrive in Phase 0.</p>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: var(--s9);
+    background: var(--surface-sage);
+    border-top: 1px solid var(--line);
+    padding-block: var(--s7);
+  }
+  .inner { display: grid; gap: var(--s6); }
+  .disclaimer { --stack: var(--s2); }
+  .disclaimer .eyebrow { margin-bottom: var(--s2); }
+  .links ul { list-style: none; padding: 0; display: grid; gap: var(--s2); margin-bottom: var(--s3); }
+  @media (min-width: 52rem) {
+    .inner { grid-template-columns: 1fr 1.4fr 1fr; }
+  }
+</style>

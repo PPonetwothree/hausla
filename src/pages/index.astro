@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import Logo from '../components/Logo.astro';
+import { site, crisis } from '../lib/site';
+import { url } from '../lib/url';
+---
+<Base>
+  <section class="container section hold stack">
+    <Logo size="lg" />
+    <p class="lede">{site.tagline} <span class="hindi" lang="hi">{site.taglineHi}</span></p>
+    <p>
+      Hausla will be a free companion for families facing cancer in India: clear guides, verified hospitals and
+      financial help, and places to find support. We are building it carefully, one piece at a time.
+    </p>
+    <p><a class="btn btn-secondary" href={url('/style-tile')}>See the design system</a></p>
+    <div class="now card">
+      <p><strong>If you need to talk to someone now,</strong> these lines are free:</p>
+      <ul>
+        {crisis.lines.map((l) => <li>{l.name}: <a href={`tel:${l.tel}`}>{l.number}</a></li>)}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hold { --stack: var(--s5); padding-block: var(--s9); max-width: 46rem; }
+  .now { background: var(--surface-clay); border-color: transparent; }
+  .now ul { margin-top: var(--s2); padding-left: 1.2em; }
+  .now a { color: var(--clay-ink); font-weight: 700; }
+</style>

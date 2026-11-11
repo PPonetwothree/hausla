@@ -1,0 +1,32 @@
+---
+/** Small line icons, drawn for Hausla. 24×24, 1.6 stroke. */
+interface Props { name: keyof typeof paths; size?: number; label?: string }
+const paths = {
+  hands: 'M4 13.5c1.6-1.2 3.4-1.4 5-.6l2.5 1.3c.9.5.9 1.8-.1 2.2l-2.9.9 M4 19h4.5l5.5-1.6 5.6-3.3c.9-.5 1-1.8.1-2.3-.6-.4-1.4-.4-2 0L14 13.5 M12 4.2c.9-1 2.6-1 3.5 0 .9 1 .9 2.5 0 3.5L12 11 8.5 7.7c-.9-1-.9-2.5 0-3.5.9-1 2.6-1 3.5 0z',
+  sprout: 'M12 20v-8 M12 12c0-3.5-2.6-5.5-6.5-5.5 0 3.5 2.6 5.5 6.5 5.5z M12 10c0-3 2.2-5 5.8-5 0 3-2.2 5-5.8 5z M7 20h10',
+  path: 'M4 20c4 0 5-2.5 7-6s4-6 9-6 M17 5l3 3-3 3',
+  sun: 'M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M12 2.5v2 M12 19.5v2 M4.6 4.6 6 6 M18 18l1.4 1.4 M2.5 12h2 M19.5 12h2 M4.6 19.4 6 18 M18 6l1.4-1.4',
+  book: 'M4 5.5C6.5 4.5 9.5 4.5 12 6c2.5-1.5 5.5-1.5 8-.5v13c-2.5-1-5.5-1-8 .5-2.5-1.5-5.5-1.5-8-.5z M12 6v13',
+  search: 'M10.5 17a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13z M15.5 15.5 20 20',
+  phone: 'M6.5 3.5h3l1.5 4-2 1.2a10 10 0 0 0 5.3 5.3l1.2-2 4 1.5v3a2 2 0 0 1-2.2 2A16 16 0 0 1 4.5 5.7a2 2 0 0 1 2-2.2z',
+  arrow: 'M5 12h14 M13 6l6 6-6 6',
+  bookmark: 'M7 4h10v16l-5-3.5L7 20z',
+  check: 'M5 12.5l4.5 4.5L19 7.5',
+  chevron: 'M6 9l6 6 6-6',
+} as const;
+const { name, size = 24, label } = Astro.props;
+---
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.6"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  role={label ? 'img' : undefined}
+  aria-label={label}
+  aria-hidden={label ? undefined : 'true'}
+  focusable="false"
+><path d={paths[name]} /></svg>

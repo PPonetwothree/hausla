@@ -1,0 +1,42 @@
+---
+/** Honest provenance line shown at the top of every medical page. */
+interface Props {
+  status: 'summarised' | 'medically-reviewed';
+  sources: string[];
+  lastChecked: string;
+  reviewer?: string;
+}
+const { status, sources, lastChecked, reviewer } = Astro.props;
+const date = new Date(lastChecked).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+const reviewed = status === 'medically-reviewed';
+---
+<aside class:list={['badge', { reviewed }]} aria-label="About this information">
+  <span class="dot" aria-hidden="true"></span>
+  <p>
+    <strong>{reviewed ? 'Medically reviewed' : 'Summarised from official sources'}</strong>
+    <span class="sep" aria-hidden="true">·</span>
+    {reviewed ? `Reviewed by ${reviewer}` : sources.join(', ')}
+    <span class="sep" aria-hidden="true">·</span>
+    {!reviewed && <>Not yet reviewed by a medical professional<span class="sep" aria-hidden="true">·</span></>}
+    Last checked <time datetime={lastChecked}>{date}</time>
+  </p>
+</aside>
+
+<style>
+  .badge {
+    display: flex;
+    gap: var(--s3);
+    align-items: baseline;
+    padding: var(--s3) var(--s4);
+    border-radius: var(--radius-sm);
+    background: var(--surface-blue);
+    color: var(--ink-soft);
+    font-size: var(--text-sm);
+    line-height: 1.5;
+  }
+  .badge.reviewed { background: var(--surface-sage); }
+  .dot { flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--info); transform: translateY(1px); }
+  .reviewed .dot { background: var(--primary); }
+  strong { color: var(--ink); }
+  .sep { margin-inline: 0.4em; color: var(--muted); }
+</style>

@@ -1,0 +1,70 @@
+---
+import '@fontsource-variable/atkinson-hyperlegible-next/wght.css';
+import '@fontsource-variable/hanken-grotesk/wght.css';
+import '@fontsource/mukta/400.css';
+import '@fontsource/mukta/600.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../lib/site';
+import { url } from '../lib/url';
+
+interface Props { title?: string; description?: string; lang?: string; noindex?: boolean }
+const { title, description = site.description, lang = 'en', noindex = false } = Astro.props;
+const fullTitle = title ? `${title} · ${site.name}` : `${site.name} — ${site.tagline}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang={lang} id="top">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" content="#faf7f2" />
+    <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      // Soft reveal as content scrolls into view (CSS disables it under reduced motion).
+      const els = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) => entries.forEach((e) => {
+            if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+          }),
+          { rootMargin: '0px 0px -8% 0px' },
+        );
+        els.forEach((el) => io.observe(el));
+      } else {
+        els.forEach((el) => el.classList.add('is-visible'));
+      }
+
+      // Close dropdown <details> (menu, helplines) on outside click or Escape.
+      const drops = document.querySelectorAll<HTMLDetailsElement>('details[data-close-outside]');
+      document.addEventListener('click', (e) => {
+        drops.forEach((d) => { if (d.open && !d.contains(e.target as Node)) d.open = false; });
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        drops.forEach((d) => {
+          if (d.open) { d.open = false; d.querySelector('summary')?.focus(); }
+        });
+      });
+    </script>
+  </body>
+</html>

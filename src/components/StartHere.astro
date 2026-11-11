@@ -1,0 +1,66 @@
+---
+/** The five situation-based entry paths. The heart of the homepage. */
+import Icon from './Icon.astro';
+import { url } from '../lib/url';
+
+const paths = [
+  { icon: 'hands', title: "I'm caring for someone", text: 'Hospitals, money, paperwork, and looking after yourself too.', href: '/start/caregiver', primary: true },
+  { icon: 'sprout', title: "I've just been diagnosed", text: 'Take a breath. Start with what matters this week.', href: '/start/diagnosed' },
+  { icon: 'path', title: "I'm in treatment", text: 'What to expect, and how to manage the days in between.', href: '/start/treatment' },
+  { icon: 'sun', title: "I've finished treatment", text: 'Follow-ups, life after, and finding your feet again.', href: '/start/after' },
+  { icon: 'book', title: 'I want to learn or research', text: 'The science, the data, and where to begin.', href: '/start/learn' },
+] as const;
+---
+<ul class="start" role="list">
+  {paths.map((p) => (
+    <li class:list={['reveal', { primary: 'primary' in p }]}>
+      <a href={url(p.href)}>
+        <span class="icon"><Icon name={p.icon} size={26} /></span>
+        <span class="text">
+          <span class="title">{p.title}</span>
+          <span class="desc">{p.text}</span>
+        </span>
+        <span class="go"><Icon name="arrow" size={20} /></span>
+      </a>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .start { list-style: none; padding: 0; display: grid; gap: var(--s3); }
+  li { max-width: none; }
+  a {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--s4);
+    padding: var(--s4) var(--s5);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    color: var(--ink);
+    text-decoration: none;
+    transition: border-color var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease);
+  }
+  a:hover { border-color: var(--primary); background: #fff; color: var(--ink); }
+  .icon {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--surface-teal);
+    color: var(--primary);
+  }
+  .primary .icon { background: var(--surface-clay); color: var(--clay-ink); }
+  .primary a { border-color: var(--line-strong); }
+  .title { display: block; font-family: var(--font-head); font-weight: 600; font-size: var(--text-lg); line-height: 1.3; }
+  .desc { display: block; color: var(--ink-soft); font-size: var(--text-sm); line-height: 1.5; margin-top: 2px; }
+  .go { color: var(--muted); transition: transform var(--dur) var(--ease), color var(--dur-fast) var(--ease); }
+  a:hover .go { transform: translateX(3px); color: var(--primary); }
+
+  @media (min-width: 48rem) {
+    .start { grid-template-columns: repeat(2, 1fr); }
+    .primary { grid-column: 1 / -1; }
+  }
+</style>

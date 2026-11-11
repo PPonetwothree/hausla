@@ -1,0 +1,59 @@
+---
+/**
+ * A story from the library: our summary + a short attributed quote, linking
+ * to the original. `sample` marks placeholder content in the design system.
+ */
+interface Props {
+  quote: string;
+  author: string;
+  perspective: string;
+  summary: string;
+  href: string;
+  publisher: string;
+  sample?: boolean;
+}
+const { quote, author, perspective, summary, href, publisher, sample = false } = Astro.props;
+---
+<article class="story reveal">
+  {sample && <p class="sample">Sample · not a real story</p>}
+  <blockquote><p>{quote}</p></blockquote>
+  <p class="who"><span class="name">{author}</span> · {perspective}</p>
+  <p class="summary small">{summary}</p>
+  <a class="read small" href={href} rel="noopener" target="_blank">
+    Read the full story on {publisher}<span class="visually-hidden"> (opens in a new tab)</span> ↗
+  </a>
+</article>
+
+<style>
+  .story {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s3);
+    padding: var(--s5);
+    background: var(--surface-clay);
+    border-radius: var(--radius);
+    border-left: 4px solid var(--clay);
+  }
+  .sample {
+    align-self: flex-start;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--clay-ink);
+    border: 1px dashed var(--clay);
+    border-radius: var(--radius-pill);
+    padding: 0 var(--s3);
+  }
+  blockquote p {
+    font-family: var(--font-head);
+    font-size: var(--text-lg);
+    font-weight: 500;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+  blockquote p::before { content: '“'; color: var(--clay); }
+  blockquote p::after { content: '”'; color: var(--clay); }
+  .who { color: var(--clay-ink); font-size: var(--text-sm); }
+  .name { font-weight: 700; }
+  .summary { color: var(--ink-soft); flex: 1; }
+  .read { color: var(--clay-ink); font-weight: 600; }
+</style>

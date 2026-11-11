@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+const entries = (await getCollection('glossary')).sort((a, b) => a.data.term.localeCompare(b.data.term));
+---
+<Base title="Glossary" description="Plain-language meanings of medical and hospital words you may hear during cancer care in India.">
+  <section class="container section stack" style="--stack: var(--s5)">
+    <p class="eyebrow">Glossary</p>
+    <h1>Words you may hear</h1>
+    <p class="lede">Plain-language meanings. Tap or hover over an underlined word anywhere on Hausla to see these.</p>
+    <dl>
+      {entries.map((e) => (
+        <div id={e.id} class="entry">
+          <dt>
+            {e.data.term}
+            {e.data.hindi && <span class="hindi" lang="hi">{e.data.hindi}</span>}
+          </dt>
+          <dd>
+            <p>{e.data.meaning}</p>
+            {e.data.more && <p class="muted">{e.data.more}</p>}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+</Base>
+
+<style>
+  dl { display: grid; gap: 0; max-width: 46rem; }
+  .entry { padding-block: var(--s5); border-top: 1px solid var(--line); scroll-margin-top: 90px; }
+  .entry:target { background: var(--surface-teal); border-radius: var(--radius-sm); padding-inline: var(--s4); }
+  dt { font-family: var(--font-head); font-weight: 600; font-size: var(--text-xl); display: flex; gap: var(--s3); align-items: baseline; }
+  dt .hindi { font-size: var(--text-lg); color: var(--muted); font-weight: 400; }
+  dd { margin-top: var(--s2); display: grid; gap: var(--s2); }
+</style>

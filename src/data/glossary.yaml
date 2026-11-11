@@ -1,0 +1,30 @@
+# Glossary entries used by <Term id="...">. Keep `meaning` short: it appears in
+# a small popup. Plain language, no medical advice.
+
+- id: hausla
+  term: Hausla
+  hindi: हौसला
+  meaning: Courage; the spirit that keeps you going when things are hard.
+
+- id: dharamshala
+  term: Dharamshala
+  hindi: धर्मशाला
+  meaning: A rest house offering free or low-cost stays. Many are near large hospitals, where families stay during treatment.
+
+- id: opd
+  term: OPD
+  meaning: Outpatient Department, where you see a doctor without being admitted to the hospital.
+  more: Most first visits to a government hospital begin at the OPD. Registration often opens early in the morning, and some hospitals allow online registration in advance.
+
+- id: parchi
+  term: Parchi
+  hindi: पर्ची
+  meaning: The registration slip or card a hospital gives you. Keep it safe; you will usually need it at every visit.
+
+- id: oncologist
+  term: Oncologist
+  meaning: A doctor who specialises in cancer. Medical, surgical and radiation oncologists each treat cancer in different ways.
+
+- id: biopsy
+  term: Biopsy
+  meaning: A small sample of tissue taken so it can be examined under a microscope to check for cancer cells.
