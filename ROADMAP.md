@@ -30,6 +30,8 @@ unchecked item, finish it, update this file, commit.
 - [x] Guide 6: Supporting a Loved One with Cancer (from NCI 'Caring for the Caregiver', 2024)
 - [x] Guide 2: Processing the Diagnosis (from NCI 'Emotions and Cancer', updated Apr 2025)
 - [x] Guide 1: Understanding Cancer: The Basics (from 4 NCI pages) — FIRST PRIORITY for a medical reviewer
+- [x] Guide 5: Building Mental Strength & Resilience (from NCI PDQ 'Adjustment to Cancer', May 2025)
+- [ ] Guides 3, 4, 7 (Making Treatment Decisions; What to Expect During Treatment; Life During and After)
 - [x] Handbook draft: Coming to Delhi for treatment — on branch `handbook-coming-to-delhi`,
       awaiting founder review. Open items: DUSIB helpline and ORS details not yet confirmed
       from official sites (TLS errors from the sandbox); Vishram Sadan charges conflict between sources.
