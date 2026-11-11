@@ -1,0 +1,32 @@
+---
+import StartPath, { type Step } from '../../layouts/StartPath.astro';
+const steps: Step[] = [
+  {
+    title: 'Know who to call',
+    body: `<p>Ask your care team who to contact if you feel unwell or something changes, at what number, and at what times, including nights and holidays. Write it down and keep it with you, and give a copy to your family.</p>`,
+  },
+  {
+    title: 'Keep a simple diary',
+    body: `<p>Note how you feel each day, any medicines you take and any changes you notice. It helps you remember what to tell your doctor at the next visit.</p>`,
+  },
+  {
+    title: 'Keep your papers together',
+    body: `<p>Bring your hospital card, reports and medicine list to every visit. Keep every bill and receipt; they matter for financial help.</p>`,
+    links: [
+      { label: 'Papers to bring', href: '/find-care/coming-to-delhi#papers' },
+      { label: 'Help with treatment costs', href: '/find-care/financial-help' },
+    ],
+  },
+  {
+    title: 'Let the days in between be gentle',
+    body: `<p>Treatment can be tiring in body and mind. Rest when you need to, accept help, and keep doing small things that feel like you. Bad days don't mean you're doing something wrong.</p>`,
+  },
+];
+---
+<StartPath
+  title="If you're in treatment"
+  lede="Practical ways to get through the weeks of treatment, and the days in between."
+  current="/start/treatment"
+  steps={steps}
+  coming={['Guide: What to expect during treatment', 'Preparing for chemotherapy', 'Understanding prescriptions', 'Managing everyday challenges during treatment']}
+/>

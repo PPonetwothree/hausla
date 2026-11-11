@@ -1,0 +1,28 @@
+---
+import HubPage from '../layouts/HubPage.astro';
+import Hub from '../components/Hub.astro';
+import { crisis } from '../lib/site';
+const items = [
+  { title: 'Mental health support', text: 'Indian helplines, online counselling and professional psychological support.' },
+  { title: 'Online communities', text: 'Moderated communities for patients, survivors and caregivers. Peer support, not medical advice.' },
+  { title: 'Stories', text: 'Experiences of patients, survivors and caregivers, always linked to the person who wrote them.' },
+];
+---
+<HubPage title="Support" eyebrow="SafeSpace" lede="You don't have to carry this alone. Places to talk, to listen, and to be understood.">
+  <div class="now">
+    <h2>Talk to someone now</h2>
+    <p>These lines are free. If you are struggling or in danger, please call.</p>
+    <ul role="list">
+      {crisis.lines.map((l) => <li><a href={`tel:${l.tel}`}>{l.number}</a><span>{l.name}</span></li>)}
+    </ul>
+  </div>
+  <Hub items={items} />
+</HubPage>
+<style>
+  .now { max-width: 46rem; padding: var(--s5); background: var(--surface-clay); border-radius: var(--radius); display: grid; gap: var(--s3); margin-bottom: var(--s6); }
+  .now h2 { font-size: var(--text-xl); }
+  .now ul { list-style: none; padding: 0; display: grid; gap: var(--s3); }
+  .now li { display: flex; align-items: center; gap: var(--s4); max-width: none; }
+  .now a { font-family: var(--font-head); font-weight: 700; font-size: 1.5rem; color: var(--clay-ink); text-decoration: none; background: var(--surface); padding: var(--s1) var(--s4); border-radius: var(--radius-sm); min-width: 6rem; text-align: center; }
+  .now span { color: var(--ink-soft); }
+</style>

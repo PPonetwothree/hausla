@@ -1,0 +1,24 @@
+---
+import StartPath, { type Step } from '../../layouts/StartPath.astro';
+const steps: Step[] = [
+  {
+    title: "It's normal to feel unsettled",
+    body: `<p>Finishing treatment can bring relief, and also tiredness, worry about the future, or a strange sense of being on your own after months of hospital visits. Many people feel this. It's allowed.</p>`,
+  },
+  {
+    title: 'Ask about your follow-up plan',
+    body: `<p>Ask your care team what follow-up you need, how often, and what changes should make you contact them sooner. Write it down and keep your records together.</p>`,
+  },
+  {
+    title: 'Find your feet, slowly',
+    body: `<p>Going back to work, studies or daily routines often takes longer than people expect. Give yourself time, and talk to people who understand.</p>`,
+  },
+];
+---
+<StartPath
+  title="If you've finished treatment"
+  lede="Life after treatment: follow-ups, feelings, and finding your feet again."
+  current="/start/after"
+  steps={steps}
+  coming={['Guide: Life during and after cancer', 'Guide: Building mental strength and resilience', 'Stories from survivors (linked to the people who wrote them)']}
+/>

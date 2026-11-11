@@ -1,0 +1,19 @@
+---
+import Base from './Base.astro';
+interface Props { title: string; eyebrow: string; lede: string }
+const { title, eyebrow, lede } = Astro.props;
+---
+<Base title={title} description={lede}>
+  <div class="container page">
+    <header class="head stack">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1>{title}</h1>
+      <p class="lede">{lede}</p>
+    </header>
+    <slot />
+  </div>
+</Base>
+<style>
+  .page { padding-block: var(--s8) var(--s6); }
+  .head { --stack: var(--s4); max-width: 46rem; margin-bottom: var(--s6); }
+</style>

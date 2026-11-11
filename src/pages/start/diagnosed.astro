@@ -1,0 +1,41 @@
+---
+import StartPath, { type Step } from '../../layouts/StartPath.astro';
+const steps: Step[] = [
+  {
+    title: 'Take a breath',
+    body: `<p>Shock, fear, numbness, even calm: there's no right way to feel after hearing the word cancer. Most people take in information slowly, over weeks. You don't need to understand everything, or decide everything, today.</p>`,
+  },
+  {
+    title: "Ask for what you've been told, in writing",
+    body: `<p>Ask the doctor to write down the exact diagnosis and the next steps. Keep every report. It helps you, your family, and any other doctor you see.</p>`,
+    links: [{ label: 'Words you may hear', href: '/glossary' }],
+  },
+  {
+    title: "Bring someone with you",
+    body: `<p>If you can, take a family member or friend to appointments. A second person remembers what you might miss and can take notes while you listen.</p>`,
+  },
+  {
+    title: 'Know that you can ask questions, and ask for more time',
+    body: `<p>It's normal to ask the doctor to explain again, to ask what the options are, and to ask whether a decision needs to be made today or can wait a few days. Many people also seek a second opinion; you can ask your doctor about this.</p>`,
+  },
+  {
+    title: 'Sort out the practical things one at a time',
+    body: `<p>Hospitals, appointments and costs can feel overwhelming. Our practical guides take them one at a time.</p>`,
+    links: [
+      { label: 'Coming to Delhi for treatment', href: '/find-care/coming-to-delhi' },
+      { label: 'Help with treatment costs', href: '/find-care/financial-help' },
+    ],
+  },
+  {
+    title: 'Tell people when you are ready',
+    body: `<p>You decide who to tell, and when. Some people want everyone to know; others tell only a few. Both are fine.</p>`,
+  },
+];
+---
+<StartPath
+  title="If you've just been diagnosed"
+  lede="Take a breath. These are a few gentle first steps. You don't need to read anything else today."
+  current="/start/diagnosed"
+  steps={steps}
+  coming={['Guide: Processing the diagnosis', 'Guide: Understanding cancer, the basics', 'Questions to ask your oncologist', 'Understanding second opinions']}
+/>

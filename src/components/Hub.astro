@@ -1,0 +1,30 @@
+---
+/** Simple hub: a list of items, each either ready (linked) or coming soon. */
+import { url } from '../lib/url';
+interface Item { title: string; text: string; href?: string }
+interface Props { items: Item[] }
+const { items } = Astro.props;
+---
+<ul class="hub grid" role="list" style="--min: 17rem">
+  {items.map((it, i) => (
+    <li class:list={['card', 'reveal', { ready: !!it.href }]}>
+      <p class="num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</p>
+      <h2>{it.href ? <a href={url(it.href)}>{it.title}</a> : it.title}</h2>
+      <p class="small text">{it.text}</p>
+      {!it.href && <p class="soon small">Coming soon</p>}
+    </li>
+  ))}
+</ul>
+<style>
+  ul { list-style: none; padding: 0; }
+  li { position: relative; display: grid; gap: var(--s2); align-content: start; max-width: none; }
+  li.ready:hover { border-color: var(--primary); }
+  .num { font-family: var(--font-head); font-weight: 600; color: var(--clay); font-size: var(--text-sm); letter-spacing: 0.08em; }
+  h2 { font-size: var(--text-lg); }
+  h2 a { color: var(--ink); text-decoration: none; }
+  h2 a::after { content: ''; position: absolute; inset: 0; border-radius: var(--radius); }
+  li:has(a:focus-visible) { outline: 3px solid var(--focus); outline-offset: 3px; }
+  h2 a:focus-visible { outline: none; }
+  .text { color: var(--ink-soft); }
+  .soon { justify-self: start; font-weight: 700; color: var(--info); background: var(--surface-blue); padding: 2px var(--s3); border-radius: var(--radius-pill); }
+</style>

@@ -1,0 +1,49 @@
+---
+import StartPath, { type Step } from '../../layouts/StartPath.astro';
+const steps: Step[] = [
+  {
+    title: "You don't have to do everything today",
+    body: `<p>Caring for someone with cancer often means becoming, overnight, their organiser, driver, translator and support. It's a lot. Pick one small thing to do today. The rest can wait.</p>`,
+  },
+  {
+    title: 'Gather the papers',
+    body: `<p>Every hospital will ask for the earlier reports, scans and ID. Putting them in one folder, in date order, saves hours later.</p>`,
+    links: [{ label: 'Papers to bring', href: '/find-care/coming-to-delhi#papers' }],
+  },
+  {
+    title: 'Find the right hospital and get an appointment',
+    body: `<p>If you're coming to Delhi, our handbook explains online registration, what happens on the day and where families stay.</p>`,
+    links: [
+      { label: 'Coming to Delhi for treatment', href: '/find-care/coming-to-delhi' },
+      { label: 'Cancer hospitals in Delhi NCR', href: '/find-care/hospitals' },
+    ],
+  },
+  {
+    title: 'Start on the money early',
+    body: `<p>Government schemes can cover a large part of treatment costs, but applications take time. Ask the hospital's patient welfare department as soon as you have a treatment plan.</p>`,
+    links: [{ label: 'Help with treatment costs', href: '/find-care/financial-help' }],
+  },
+  {
+    title: 'Keep a notebook for doctor visits',
+    body: `<p>Write your questions down before each visit, and the answers during it. Questions many families find useful:</p>
+      <ul>
+        <li>What exactly is the diagnosis? Can we have it in writing?</li>
+        <li>What are the next steps, and when?</li>
+        <li>Who do we contact if something changes, and how?</li>
+        <li>When is the next appointment, and what should we bring?</li>
+      </ul>
+      <p>It's fine to ask the doctor to repeat something, slow down or write it down.</p>`,
+  },
+  {
+    title: 'Share the load, and look after yourself',
+    body: `<p>Make a list of things others can do: queueing, cooking, paperwork, staying overnight, calling relatives with updates. People often want to help but don't know how. Eat, rest when you can, and take turns if there are others.</p>`,
+  },
+];
+---
+<StartPath
+  title="If you're caring for someone"
+  lede="Practical first steps for the person holding things together: hospitals, paperwork, money, and yourself."
+  current="/start/caregiver"
+  steps={steps}
+  coming={['Guide: Supporting a loved one with cancer', 'Understanding the basics of cancer, in plain language', 'Talking to children and family about a diagnosis']}
+/>

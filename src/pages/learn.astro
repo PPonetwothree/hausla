@@ -1,0 +1,15 @@
+---
+import HubPage from '../layouts/HubPage.astro';
+import Hub from '../components/Hub.astro';
+const items = [
+  { title: 'Words you may hear', text: 'Plain-language meanings of medical and hospital words.', href: '/glossary' },
+  { title: 'Guides', text: 'Seven guides, from the basics to life after treatment.', href: '/guides' },
+  { title: 'Understanding cancer', text: 'What cancer is, types of cancer, stages and grading, diagnosis and biopsy basics.' },
+  { title: 'Treatments and decisions', text: 'Treatment options, questions to ask, and second opinions.' },
+  { title: 'Practical handbooks', text: 'Hospital visits, organising reports, prescriptions and chemotherapy preparation.' },
+  { title: 'Research and data', text: 'Cancer in India with full sources, and a beginner-friendly research library.' },
+];
+---
+<HubPage title="Learn" eyebrow="Learn" lede="Understanding cancer, treatment and everyday practicalities, in plain language and always with sources.">
+  <Hub items={items} />
+</HubPage>

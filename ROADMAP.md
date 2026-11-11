@@ -25,7 +25,8 @@ unchecked item, finish it, update this file, commit.
 
 - [x] Real homepage (Start here, helpline strip, note for caregivers, stories empty state,
       what's coming, how we work)
-- [ ] Five Start-here path pages
+- [x] Five Start-here path pages + /start index (branch `start-paths`)
+- [x] Hub pages for Learn, Guides, Support so no menu item 404s (branch `start-paths`)
 - [ ] Guides 1–3 (Understanding Cancer: The Basics; Processing the Diagnosis;
       Supporting a Loved One with Cancer) — summarised from official sources
 - [x] Handbook draft: Coming to Delhi for treatment — on branch `handbook-coming-to-delhi`,
@@ -79,4 +80,7 @@ unchecked item, finish it, update this file, commit.
   rgcirc, rmlh). Directory started (6 entries) + Find care landing page, same branch.
 - (session 2) Financial-help guide written from PIB/MoHFW/Delhi health/PMNRF sources; allowlist
   extended for those. pmjay.gov.in and nha.gov.in refuse automated access (403) — PM-JAY facts
-  come from PIB releases. Branch still awaiting founder "publish".
+  come from PIB releases. Founder approved publishing; merged to main (handbook,
+  directory, Find care, financial help). Then built Start-here paths + Learn/Guides/Support hubs
+  on branch `start-paths`. State schemes (UP/Bihar/Haryana) deferred: official sources need
+  hosts cms.neva.gov.in, SACHIS, Bihar health — only blogs/news found so far.

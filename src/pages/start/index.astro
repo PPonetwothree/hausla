@@ -1,0 +1,19 @@
+---
+import Base from '../../layouts/Base.astro';
+import StartHere from '../../components/StartHere.astro';
+---
+<Base title="Start here" description="Choose where to begin: caring for someone, newly diagnosed, in treatment, after treatment, or learning.">
+  <div class="container page">
+    <header class="head stack">
+      <p class="eyebrow">Start here</p>
+      <h1>Where would you like to begin?</h1>
+      <p class="lede">Choose the one closest to you. You can always come back and choose another.</p>
+    </header>
+    <div class="paths"><StartHere /></div>
+  </div>
+</Base>
+<style>
+  .page { padding-block: var(--s8) var(--s6); }
+  .head { --stack: var(--s4); max-width: 46rem; margin-bottom: var(--s6); }
+  .paths { max-width: 56rem; }
+</style>
