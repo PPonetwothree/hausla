@@ -38,7 +38,7 @@ const tipId = `term-${id}-${Math.random().toString(36).slice(2, 8)}`;
     z-index: 30;
     width: max-content;
     max-width: min(20rem, calc(100vw - 2rem));
-    display: grid;
+    display: none; /* closed popups must not take up space, or they widen the page on small phones */
     gap: var(--s1);
     padding: var(--s3) var(--s4);
     background: var(--ink);
@@ -48,10 +48,8 @@ const tipId = `term-${id}-${Math.random().toString(36).slice(2, 8)}`;
     line-height: 1.5;
     text-align: left;
     box-shadow: 0 10px 28px -12px rgb(38 51 47 / 0.45);
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(-3px) translateX(var(--shift, 0px));
-    transition: opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease), visibility 0s linear var(--dur-fast);
+    transform: translateX(var(--shift, 0px));
+    animation: term-in var(--dur-fast) var(--ease);
   }
   .term-head { display: flex; gap: var(--s2); align-items: baseline; }
   .term-head .hindi { opacity: 0.8; line-height: 1.3; }
@@ -60,10 +58,11 @@ const tipId = `term-${id}-${Math.random().toString(36).slice(2, 8)}`;
 
   /* Show on hover (devices that can hover), keyboard focus, or tap. */
   @media (hover: hover) {
-    .term:not(.is-repeat):hover .term-tip { visibility: visible; opacity: 1; transform: translateX(var(--shift, 0px)); transition-delay: 0s; }
+    .term:not(.is-repeat):hover .term-tip { display: grid; }
   }
   .term:focus-within .term-tip,
-  .term.is-open .term-tip { visibility: visible; opacity: 1; transform: translateX(var(--shift, 0px)); transition-delay: 0s; }
+  .term.is-open .term-tip { display: grid; }
+  @keyframes term-in { from { opacity: 0; } }
   .term.is-open .term-more, .term:focus-within .term-more { pointer-events: auto; }
 </style>
 
