@@ -1,0 +1,109 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Icon from './Icon.astro';
+
+interface Props { h: CollectionEntry<'hospitals'> }
+const { h } = Astro.props;
+const d = h.data;
+
+const typeLabel: Record<string, string> = {
+  government: 'Government',
+  private: 'Private',
+  'regional-cancer-centre': 'Regional Cancer Centre',
+  'medical-college': 'Medical college',
+  charitable: 'Charitable',
+};
+const fmt = (dt: Date) => dt.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+const ageDays = (Date.now() - d.lastVerified.getTime()) / 86_400_000;
+const stale = ageDays > 365;
+const telHref = (p: string) => `tel:${p.replace(/[^0-9+]/g, '')}`;
+---
+<article class="hosp card reveal" data-area={d.area} data-type={d.type} id={h.id}>
+  <header>
+    <p class="tags">
+      <span class:list={['tag', d.type]}>{typeLabel[d.type]}</span>
+      <span class="area">{d.area}</span>
+    </p>
+    <h2>{d.name}</h2>
+    <p class="addr small">{d.address}</p>
+  </header>
+
+  {d.departments.length > 0 && (
+    <ul class="depts" role="list" aria-label="Departments">
+      {d.departments.map((x) => <li>{x}</li>)}
+    </ul>
+  )}
+
+  {d.services.length > 0 && (
+    <ul class="services small">
+      {d.services.map((x) => <li>{x}</li>)}
+    </ul>
+  )}
+
+  <div class="actions">
+    {d.contacts.map((c) => (
+      c.phone ? (
+        <a class="contact" href={telHref(c.phone)}><Icon name="phone" size={18} /><span><span class="lbl">{c.label}</span> {c.phone}</span></a>
+      ) : c.email ? (
+        <a class="contact" href={`mailto:${c.email}`}><span><span class="lbl">{c.label}</span> {c.email}</span></a>
+      ) : c.url ? (
+        <a class="contact" href={c.url} rel="noopener"><span><span class="lbl">{c.label}</span> ↗</span></a>
+      ) : null
+    ))}
+    {d.website && <a class="contact" href={d.website} rel="noopener"><span><span class="lbl">Official website</span> ↗</span></a>}
+  </div>
+
+  {d.unverified.length > 0 && (
+    <div class="confirm small">
+      <strong>Please confirm with the hospital:</strong>
+      <ul>{d.unverified.map((x) => <li>{x}</li>)}</ul>
+    </div>
+  )}
+
+  <footer class="small">
+    <p class:list={['verified', { stale }]}>
+      {stale ? 'May be out of date · last verified ' : 'Last verified '}
+      <time datetime={d.lastVerified.toISOString().slice(0, 10)}>{fmt(d.lastVerified)}</time>
+    </p>
+    <details>
+      <summary>Sources</summary>
+      <ol>
+        {d.sources.map((s) => <li><a href={s.url} rel="noopener">{s.title}</a> · {s.publisher}</li>)}
+      </ol>
+      {d.notes && <p class="muted">{d.notes}</p>}
+    </details>
+  </footer>
+</article>
+
+<style>
+  .hosp { display: grid; gap: var(--s4); align-content: start; scroll-margin-top: 90px; }
+  .hosp[hidden] { display: none; }
+  header { display: grid; gap: var(--s2); }
+  .tags { display: flex; flex-wrap: wrap; gap: var(--s2); align-items: center; }
+  .tag { font-size: 0.8125rem; font-weight: 700; padding: 2px var(--s3); border-radius: var(--radius-pill); background: var(--surface-teal); color: var(--primary-hover); }
+  .tag.private { background: var(--surface-blue); color: var(--info); }
+  .area { font-size: var(--text-sm); color: var(--muted); }
+  h2 { font-size: var(--text-xl); }
+  .addr { color: var(--ink-soft); }
+  .depts { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: var(--s2); }
+  .depts li { font-size: var(--text-sm); padding: 2px var(--s3); border: 1px solid var(--line-strong); border-radius: var(--radius-pill); color: var(--ink-soft); }
+  .services { padding-left: 1.2em; color: var(--ink-soft); display: grid; gap: var(--s1); }
+  .services li::marker { color: var(--primary); }
+  .actions { display: flex; flex-wrap: wrap; gap: var(--s2); }
+  .contact {
+    display: inline-flex; align-items: center; gap: var(--s2);
+    min-height: 44px; padding: var(--s2) var(--s4);
+    border: 1.5px solid var(--primary); border-radius: var(--radius-pill);
+    color: var(--primary); text-decoration: none; font-weight: 600; font-size: var(--text-sm);
+    overflow-wrap: anywhere;
+  }
+  .contact:hover { background: var(--surface-sage); }
+  .lbl { color: var(--ink-soft); font-weight: 400; }
+  .confirm { padding: var(--s3) var(--s4); background: var(--surface-clay); border-radius: var(--radius-sm); }
+  .confirm ul { padding-left: 1.2em; margin-top: var(--s1); }
+  footer { display: grid; gap: var(--s2); border-top: 1px solid var(--line); padding-top: var(--s3); color: var(--muted); }
+  .verified.stale { color: var(--clay-ink); font-weight: 700; }
+  summary { cursor: pointer; color: var(--primary); font-weight: 600; min-height: 32px; }
+  details ol { padding-left: 1.2em; margin-top: var(--s2); display: grid; gap: var(--s1); overflow-wrap: anywhere; }
+  details p { margin-top: var(--s2); }
+</style>

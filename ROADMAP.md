@@ -31,7 +31,10 @@ unchecked item, finish it, update this file, commit.
 - [x] Handbook draft: Coming to Delhi for treatment — on branch `handbook-coming-to-delhi`,
       awaiting founder review. Open items: DUSIB helpline and ORS details not yet confirmed
       from official sites (TLS errors from the sandbox); Vishram Sadan charges conflict between sources.
-- [ ] Delhi NCR hospital directory, 25–40 verified centres
+- [~] Delhi NCR hospital directory — first 6 entries on the review branch (AIIMS IRCH, NCI Jhajjar,
+      DSCI East/West, Safdarjung, RGCI Rohini) with filters. Next to add: RML, Lok Nayak, LHMC,
+      GTB, ESIC, RGCI Niti Bagh, Dharamshila Narayana, Action Cancer, major private hospitals.
+      AIIMS pages block automated checks: verify AIIMS phone numbers by hand.
 - [ ] Helplines page
 - [ ] Pagefind search with filters
 - [ ] Bookmarks (localStorage) and printable checklists
@@ -69,4 +72,5 @@ unchecked item, finish it, update this file, commit.
   (About, How we make Hausla, Disclaimer, Privacy); contact shows "being set up"
   until an inbox exists. Real homepage live; fixed dropped spaces site-wide
   (compressHTML off). Delhi handbook drafted on a review branch; network allowlist
-  extended for official sites (aiims.edu, ors.gov.in, dusib, vmmc-sjh, telemanas).
+  extended for official sites (aiims.edu, ors.gov.in, dusib, vmmc-sjh, telemanas, dsci,
+  rgcirc, rmlh). Directory started (6 entries) + Find care landing page, same branch.

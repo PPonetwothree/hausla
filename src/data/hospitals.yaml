@@ -1,0 +1,180 @@
+# Delhi NCR cancer care directory.
+# RULES (see CLAUDE.md): every fact comes from the cited official source; no
+# individual doctors; no estimated costs; anything we couldn't confirm goes in
+# `unverified` so the page can say so. Update lastVerified whenever re-checked.
+
+- id: aiims-irch
+  name: Dr. B.R.A. Institute Rotary Cancer Hospital (IRCH), AIIMS New Delhi
+  type: government
+  city: New Delhi
+  state: Delhi
+  area: South Delhi
+  address: All India Institute of Medical Sciences, Ansari Nagar, New Delhi 110029
+  departments: [Medical oncology, Surgical oncology, Radiation oncology]
+  services:
+    - Cancer hospital of AIIMS New Delhi
+    - Medical Social Welfare Unit for patients needing social or financial help (Room 151, 1st floor, Dr. BRAIRCH)
+  bookingUrl: https://ors.gov.in
+  website: https://www.aiims.edu
+  contacts:
+    - label: Book an appointment online (ORS)
+      url: https://ors.gov.in
+  unverified:
+    - Current phone numbers. AIIMS publishes several, but we couldn't confirm which are current, so please check the AIIMS website.
+  sources:
+    - title: Appointment system at AIIMS (notice)
+      publisher: AIIMS New Delhi
+      url: https://aiims.edu/images/pdf/notice/Digital%20AIIMS/appointment%20system-white.pdf
+      accessed: 2026-11-11
+    - title: Medical Social Welfare Unit (notice)
+      publisher: AIIMS New Delhi
+      url: https://www.aiims.edu/index.php/en/notices/314-mswu
+      accessed: 2026-11-11
+  lastVerified: 2026-11-11
+  notes: AIIMS's own pages could not be opened directly from our checking tools on this date; details come from AIIMS documents and pages as indexed by search.
+
+- id: nci-aiims-jhajjar
+  name: National Cancer Institute (NCI), AIIMS — Jhajjar campus
+  type: government
+  city: Jhajjar
+  state: Haryana
+  area: Jhajjar (Haryana)
+  address: AIIMS Jhajjar campus, Jhajjar district, Haryana
+  departments: []
+  services:
+    - Part of AIIMS New Delhi, located on its Jhajjar campus in Haryana
+    - Infosys Foundation Vishram Sadan rest house for patients' families next to the hospital
+  bookingUrl: https://ors.gov.in
+  contacts:
+    - label: Book an appointment online (ORS)
+      url: https://ors.gov.in
+  unverified:
+    - Departments, phone numbers and exact address. Please check with AIIMS before travelling.
+    - Whether the Vishram Sadan is free; sources from 2021 say free of cost, a later report mentions a tariff.
+  sources:
+    - title: PM to inaugurate the Infosys Foundation Vishram Sadan at National Cancer Institute in Jhajjar campus of AIIMS New Delhi
+      publisher: Press Information Bureau, Government of India
+      url: https://www.pib.gov.in/PressReleaseIframePage.aspx?PRID=1765166
+      published: 2021-10-20
+      accessed: 2026-11-11
+  lastVerified: 2026-11-11
+
+- id: dsci-east
+  name: Delhi State Cancer Institute (East)
+  type: government
+  city: Delhi
+  state: Delhi
+  area: East Delhi
+  address: Dilshad Garden, Delhi 110095
+  departments:
+    - Clinical oncology
+    - Head and neck
+    - Gynaecological oncology surgery
+    - Surgery
+    - Pain and palliative care
+    - Paediatric haemato-oncology
+  services:
+    - Free General OPD and a separate paid Private OPD
+    - General OPD services, including lab collection, X-rays and radiotherapy, start at 9:00 am, Monday to Saturday (closed Sundays and holidays)
+    - Day-care chemotherapy
+    - General (free) ward beds, plus paid semi-private and private rooms
+  website: https://dsci.delhi.gov.in
+  contacts:
+    - label: Enquiry
+      phone: 011-2213 5700
+    - label: Enquiry (alternate)
+      phone: 011-2213 5200
+    - label: Email (Director)
+      email: director.dsci@nic.in
+  sources:
+    - title: Citizens' Charter (as on 2026)
+      publisher: Delhi State Cancer Institute, Govt. of NCT of Delhi
+      url: https://dsci.delhi.gov.in/sites/default/files/dsci/news_files/citizen_charter_as_on_2026_manual_1.pdf
+      accessed: 2026-11-11
+  lastVerified: 2026-11-11
+
+- id: dsci-west
+  name: Delhi State Cancer Institute (West)
+  type: government
+  city: New Delhi
+  state: Delhi
+  area: West Delhi
+  address: C-2/B, Janak Puri, New Delhi 110058
+  departments: [Radiotherapy, Day-care chemotherapy]
+  services:
+    - OPD and day-care services for cancer patients in West Delhi
+    - Managed by DSCI (East)
+  website: https://dsci.delhi.gov.in
+  contacts:
+    - label: Enquiry
+      phone: 011-2089 6179
+  unverified:
+    - The charter also lists older numbers (011-2550 1111, 011-2554 1111); we've shown the enquiry number given in the charter's general information.
+  sources:
+    - title: Citizens' Charter (as on 2026)
+      publisher: Delhi State Cancer Institute, Govt. of NCT of Delhi
+      url: https://dsci.delhi.gov.in/sites/default/files/dsci/news_files/citizen_charter_as_on_2026_manual_1.pdf
+      accessed: 2026-11-11
+  lastVerified: 2026-11-11
+
+- id: safdarjung
+  name: Safdarjung Hospital & Vardhman Mahavir Medical College
+  type: government
+  city: New Delhi
+  state: Delhi
+  area: South Delhi
+  address: Ansari Nagar West, near AIIMS, New Delhi 110029
+  departments: [Medical oncology, Radiation oncology, Cancer surgery]
+  services:
+    - Medical oncology ward, day-care chemotherapy centre and bone marrow transplant unit
+    - Radiation oncology with wards and OPD day care (a linear accelerator and CT simulator were listed as under construction/installation)
+    - Multidisciplinary tumour board
+  bookingUrl: https://ors.gov.in
+  website: https://vmmc-sjh.mohfw.gov.in
+  contacts:
+    - label: Hospital
+      phone: 011-2616 5060
+    - label: Book an appointment online (ORS)
+      url: https://ors.gov.in
+  sources:
+    - title: Medical Oncology
+      publisher: VMMC & Safdarjung Hospital
+      url: https://vmmc-sjh.mohfw.gov.in/medical-oncology
+      accessed: 2026-11-11
+    - title: Radiation Oncology
+      publisher: VMMC & Safdarjung Hospital
+      url: https://www.vmmc-sjh.mohfw.gov.in/radiation-oncology
+      accessed: 2026-11-11
+    - title: Contact Us
+      publisher: VMMC & Safdarjung Hospital
+      url: https://vmmc-sjh.mohfw.gov.in/contact-us
+      accessed: 2026-11-11
+  lastVerified: 2026-11-11
+
+- id: rgci-rohini
+  name: Rajiv Gandhi Cancer Institute and Research Centre (Rohini)
+  type: private
+  city: Delhi
+  state: Delhi
+  area: North-West Delhi
+  address: D-18, Sector 5, Rohini, Delhi 110085
+  departments: []
+  services:
+    - OPD 9:00 am to 5:00 pm, all weekdays except Sunday and holidays
+    - Emergency services 24×7
+  website: https://www.rgcirc.org
+  contacts:
+    - label: Main
+      phone: 011-4702 2222
+    - label: Alternate
+      phone: 011-2705 1037
+    - label: Email
+      email: info@rgcirc.org
+  unverified:
+    - Costs and which government schemes or insurance are accepted. Please ask the hospital.
+  sources:
+    - title: Contact Us
+      publisher: Rajiv Gandhi Cancer Institute and Research Centre
+      url: https://www.rgcirc.org/contact-us/
+      accessed: 2026-11-11
+  lastVerified: 2026-11-11

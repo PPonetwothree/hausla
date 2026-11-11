@@ -1,0 +1,109 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import HospitalCard from '../../components/HospitalCard.astro';
+import { url } from '../../lib/url';
+
+const hospitals = (await getCollection('hospitals')).sort((a, b) =>
+  a.data.type === b.data.type ? a.data.name.localeCompare(b.data.name) : a.data.type === 'government' ? -1 : 1,
+);
+const areas = [...new Set(hospitals.map((h) => h.data.area))].sort();
+---
+<Base
+  title="Cancer hospitals in Delhi NCR"
+  description="Cancer treatment centres in Delhi and nearby, with official contact details and the date each was last checked."
+>
+  <div class="container page">
+    <header class="head stack">
+      <p class="eyebrow">Find care · Directory</p>
+      <h1>Cancer hospitals in Delhi NCR</h1>
+      <p class="lede">
+        Hospitals and cancer centres in and around Delhi, with contact details taken from their official websites.
+        Every entry shows when we last checked it.
+      </p>
+      <div class="callout small">
+        <p>
+          <strong>Being listed is not a recommendation.</strong> We list hospitals, not individual doctors, and no one
+          pays to be here. Phone numbers and timings change, so please confirm before you travel. This directory is
+          just beginning: {hospitals.length} entries so far, government hospitals first.
+        </p>
+      </div>
+      <p class="small"><a href={url('/find-care/coming-to-delhi')}>New to Delhi? Read our guide to coming here for treatment →</a></p>
+    </header>
+
+    <form class="filters no-print" aria-label="Filter hospitals" data-filters>
+      <fieldset>
+        <legend>Type</legend>
+        <div class="chips">
+          <label><input type="radio" name="type" value="" checked /> All</label>
+          <label><input type="radio" name="type" value="government" /> Government</label>
+          <label><input type="radio" name="type" value="private" /> Private</label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Area</legend>
+        <div class="chips">
+          <label><input type="radio" name="area" value="" checked /> Anywhere</label>
+          {areas.map((a) => <label><input type="radio" name="area" value={a} /> {a}</label>)}
+        </div>
+      </fieldset>
+      <p class="count small" aria-live="polite" data-count>Showing all {hospitals.length}</p>
+    </form>
+
+    <div class="list">
+      {hospitals.map((h) => <HospitalCard h={h} />)}
+      <p class="empty" hidden data-empty>No hospitals match these filters yet. Try “Anywhere”.</p>
+    </div>
+
+    <p class="small muted after">
+      Know a hospital we should add, or found something out of date? See our
+      <a href={url('/editorial-policy#directory')}>directory policy</a> and <a href={url('/editorial-policy#corrections')}>how to tell us</a>.
+    </p>
+  </div>
+</Base>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-filters]');
+  if (form) {
+    const cards = [...document.querySelectorAll<HTMLElement>('.hosp')];
+    const count = form.querySelector<HTMLElement>('[data-count]')!;
+    const empty = document.querySelector<HTMLElement>('[data-empty]')!;
+    const apply = () => {
+      const f = new FormData(form);
+      const type = String(f.get('type') ?? '');
+      const area = String(f.get('area') ?? '');
+      let n = 0;
+      cards.forEach((c) => {
+        const show = (!type || c.dataset.type === type) && (!area || c.dataset.area === area);
+        c.hidden = !show;
+        if (show) n++;
+      });
+      count.textContent = n === cards.length ? `Showing all ${n}` : `Showing ${n} of ${cards.length}`;
+      empty.hidden = n > 0;
+    };
+    form.addEventListener('change', apply);
+  }
+</script>
+
+<style>
+  .page { padding-block: var(--s8) var(--s6); }
+  .head { --stack: var(--s4); max-width: 46rem; margin-bottom: var(--s6); }
+  .callout { padding: var(--s4) var(--s5); border-radius: var(--radius); background: var(--surface-blue); }
+  .filters { display: grid; gap: var(--s4); margin-bottom: var(--s5); padding: var(--s5); background: var(--surface-sage); border-radius: var(--radius); }
+  fieldset { border: 0; padding: 0; margin: 0; }
+  legend { font-family: var(--font-head); font-weight: 600; margin-bottom: var(--s2); }
+  .chips { display: flex; flex-wrap: wrap; gap: var(--s2); }
+  .chips label {
+    display: inline-flex; align-items: center; min-height: 44px; padding: var(--s2) var(--s4);
+    border: 1.5px solid var(--line-strong); border-radius: var(--radius-pill); background: var(--surface);
+    cursor: pointer; font-size: var(--text-sm); transition: border-color var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease);
+  }
+  .chips label:hover { border-color: var(--primary); }
+  .chips input { position: absolute; opacity: 0; pointer-events: none; }
+  .chips label:has(input:checked) { background: var(--primary); border-color: var(--primary); color: var(--primary-ink); font-weight: 600; }
+  .chips label:has(input:focus-visible) { outline: 3px solid var(--focus); outline-offset: 2px; }
+  .count { color: var(--muted); }
+  .list { display: grid; gap: var(--s4); grid-template-columns: repeat(auto-fill, minmax(min(100%, 24rem), 1fr)); }
+  .empty { padding: var(--s6); text-align: center; color: var(--muted); }
+  .after { margin-top: var(--s6); }
+</style>

@@ -32,6 +32,10 @@ export const hospitalSchema = z.object({
     .default([]),
   schemesAccepted: z.array(z.string()).default([]), // e.g. "AB-PMJAY"
   website: z.url().optional(),
+  bookingUrl: z.url().optional(), // e.g. ORS for hospitals that use it
+  area: z.string(), // e.g. "South Delhi", "Jhajjar (Haryana)" — used for filtering
+  services: z.array(z.string()).default([]), // what the official source says is offered
+  unverified: z.array(z.string()).default([]), // things families should confirm (we say so on the page)
   sources: z.array(sourceSchema).min(1),
   lastVerified: z.coerce.date(),
   notes: z.string().optional(),
