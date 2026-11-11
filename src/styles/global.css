@@ -268,3 +268,47 @@ a:hover {
     transform: none;
   }
 }
+
+/* ---------- Long-form text (policies, guides) ---------- */
+.prose {
+  max-width: var(--measure);
+}
+.prose > * + * {
+  margin-top: var(--s4);
+}
+.prose h2 {
+  margin-top: var(--s7);
+  scroll-margin-top: 90px;
+}
+.prose h3 {
+  margin-top: var(--s6);
+  scroll-margin-top: 90px;
+}
+.prose h2 + *,
+.prose h3 + * {
+  margin-top: var(--s3);
+}
+.prose ul,
+.prose ol {
+  padding-left: 1.25em;
+}
+.prose li + li {
+  margin-top: var(--s2);
+}
+.prose li::marker {
+  color: var(--primary);
+}
+.prose strong {
+  font-weight: 700;
+}
+.prose .callout {
+  padding: var(--s4) var(--s5);
+  border-radius: var(--radius);
+  background: var(--surface-blue);
+}
+.prose .callout.warm {
+  background: var(--surface-clay);
+}
+.prose > :first-child {
+  margin-top: 0;
+}

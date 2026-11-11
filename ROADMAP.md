@@ -12,11 +12,13 @@ unchecked item, finish it, update this file, commit.
       StoryCard, SourceBadge, Disclosure
 - [x] Style tile at `/style-tile`, glossary at `/glossary`, holding homepage, friendly 404
 - [x] GitHub Pages deploy workflow (Pages enabled, source: GitHub Actions)
-- [ ] **Founder review of the style tile** ← next
-- [ ] Apply style-tile feedback
-- [ ] Pages: About (anonymous founder note), Editorial policy, Sources & methods,
-      Disclaimer, Privacy
-- [ ] "Report an error" form (free Tally/Google Form) linked from every page
+- [x] Founder review of the style tile (approved as is)
+- [x] Pages: About, Editorial policy (with sources & methods merged in), Disclaimer, Privacy
+- [ ] **Founder: create a project inbox** (e.g. a new free email account), then set
+      `site.contactEmail` in `src/lib/site.ts` ← next
+- [ ] **Founder: create a free correction form** (Tally or Google Forms), then set
+      `site.reportErrorUrl`; link "Report an error" from every page
+- [ ] Optional: anonymous founder's note on the About page (founder writes it)
 - [ ] Check domain / trademark / NGO-name availability for "Hausla"
 
 ## Phase 1 — Caregiver MVP (months 1–3)
@@ -60,4 +62,6 @@ unchecked item, finish it, update this file, commit.
 ## Session log
 
 - 2026-11-11 — Phase 0 started. Project scaffolded; style tile, glossary, holding
-  homepage and deploy workflow built.
+  homepage and deploy workflow built. Style tile approved. Trust pages written
+  (About, How we make Hausla, Disclaimer, Privacy); contact shows "being set up"
+  until an inbox exists.

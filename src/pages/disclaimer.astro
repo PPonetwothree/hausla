@@ -1,0 +1,63 @@
+---
+import Page from '../layouts/Page.astro';
+import Contact from '../components/Contact.astro';
+import { crisis } from '../lib/site';
+import { url } from '../lib/url';
+---
+<Page
+  title="Disclaimer"
+  eyebrow="Please read"
+  lede="Hausla is here to help you understand and find your way. It is not a substitute for your doctors."
+  updated="2026-11-11"
+>
+  <div class="callout warm">
+    <p><strong>In an emergency, don't wait.</strong> Call {crisis.lines.map((l, i) => <>{i > 0 && ' or '}<a href={`tel:${l.tel}`}>{l.number}</a> ({l.name.split(' (')[0]})</>)}, or go to the nearest hospital emergency department.</p>
+  </div>
+
+  <h2 id="not-advice">Information, not medical advice</h2>
+  <p>
+    Everything on Hausla is general information for education and support. It is <strong>not medical advice</strong>,
+    and it cannot take account of your situation, history or test results. Hausla does not diagnose conditions,
+    recommend treatments, or predict how an illness or treatment will turn out.
+  </p>
+  <p>
+    Always talk to a qualified doctor about your health and before starting, stopping or changing any treatment.
+    Never ignore professional advice, or delay seeking it, because of something you read here.
+  </p>
+
+  <h2 id="review">Review status</h2>
+  <p>
+    Our medical pages are currently plain-language <strong>summaries of official sources</strong> and have not yet been
+    reviewed by a medical professional. Each page says so at the top. See our
+    <a href={url('/editorial-policy')}>editorial policy</a> for how content is made.
+  </p>
+
+  <h2 id="accuracy">Accuracy and changes</h2>
+  <p>
+    We work hard to keep information correct and current, and every directory entry shows when it was last checked.
+    But medical guidance, hospital contacts, scheme rules and costs change, sometimes without notice. Please confirm
+    important details, such as eligibility, fees, timings and phone numbers, directly with the hospital, scheme or
+    organisation before acting on them.
+  </p>
+
+  <h2 id="listings">Listings are not recommendations</h2>
+  <p>
+    Including a hospital, organisation, helpline, community or online account on Hausla does not mean we endorse it
+    or vouch for the quality of its care or advice. No one pays to be listed.
+  </p>
+
+  <h2 id="communities">Communities and stories</h2>
+  <p>
+    Online communities and personal stories can be a real comfort. They reflect individual experiences and offer
+    peer support, not professional advice. What helped one person may not be right for another.
+  </p>
+
+  <h2 id="links">Links to other websites</h2>
+  <p>
+    We link to other websites that we believe are useful and trustworthy. We don't control them and aren't responsible
+    for their content, availability or privacy practices.
+  </p>
+
+  <h2 id="contact">Found a problem?</h2>
+  <p>If you find something inaccurate or unsafe, please <Contact purpose="report" />.</p>
+</Page>

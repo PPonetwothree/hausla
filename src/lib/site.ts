@@ -4,6 +4,10 @@ export const site = {
   taglineHi: 'हर कदम पर हौसला',
   description:
     'A free, India-first companion for people affected by cancer — patients, caregivers, survivors and learners.',
+  /** Public contact address. null until the founder sets up a project inbox. */
+  contactEmail: null as string | null,
+  /** Form for reporting mistakes. null until created (free Tally or Google Form). */
+  reportErrorUrl: null as string | null,
 };
 
 /** Primary navigation. Pages not yet built show the friendly 404 for now. */

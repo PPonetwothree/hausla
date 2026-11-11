@@ -1,0 +1,117 @@
+---
+import Page from '../layouts/Page.astro';
+import Contact from '../components/Contact.astro';
+import { url } from '../lib/url';
+---
+<Page
+  title="How we make Hausla"
+  eyebrow="Editorial policy · Sources & methods"
+  lede="How we choose sources, write and check content, keep it current and correct mistakes. If something on Hausla doesn't meet these standards, please tell us."
+  updated="2026-11-11"
+  toc={[
+    { id: 'principles', label: 'Our principles' },
+    { id: 'sources', label: 'Sources we rely on' },
+    { id: 'process', label: 'How a page is made' },
+    { id: 'review-status', label: 'Review status labels' },
+    { id: 'ai', label: 'Our use of AI tools' },
+    { id: 'directory', label: 'How the directory is verified' },
+    { id: 'statistics', label: 'Statistics and data' },
+    { id: 'stories', label: 'Stories and communities' },
+    { id: 'updates', label: 'Keeping things current' },
+    { id: 'independence', label: 'Independence' },
+    { id: 'corrections', label: 'Corrections' },
+  ]}
+>
+  <h2 id="principles">Our principles</h2>
+  <ul>
+    <li><strong>Accurate before complete.</strong> We would rather publish less, later, than publish something wrong.</li>
+    <li><strong>Every claim has a source.</strong> Medical and statistical statements link to where they come from.</li>
+    <li><strong>Information, not advice.</strong> We explain; we never diagnose, recommend a treatment or predict an outcome.</li>
+    <li><strong>Honest hope.</strong> We don't suggest that positive thinking or willpower can replace medical treatment, and we don't hide difficult truths.</li>
+    <li><strong>Plain language.</strong> We write for a tired, worried reader. Medical words are explained the first time they appear.</li>
+    <li><strong>Dated and labelled.</strong> Every page shows when it was last checked and whether it has been medically reviewed.</li>
+  </ul>
+
+  <h2 id="sources">Sources we rely on</h2>
+  <p>We use sources in roughly this order of preference:</p>
+  <ol>
+    <li><strong>Indian government and national bodies</strong>: the Indian Council of Medical Research (ICMR) and its National Centre for Disease Informatics and Research (NCDIR), the Ministry of Health and Family Welfare, the National Health Authority (for Ayushman Bharat), and state health departments.</li>
+    <li><strong>Recognised Indian cancer institutions</strong>: for example Tata Memorial Centre, AIIMS, Regional Cancer Centres and the National Cancer Grid.</li>
+    <li><strong>International health bodies</strong>: the World Health Organization and its International Agency for Research on Cancer (IARC).</li>
+    <li><strong>Established patient-information services</strong>: for example the US National Cancer Institute, Cancer Research UK and Macmillan Cancer Support, used for general explanations that don't depend on country.</li>
+    <li><strong>Peer-reviewed research</strong>, preferring systematic reviews and studies from India when the question is about India.</li>
+  </ol>
+  <p>
+    We don't use as sources: news articles on their own, hospital marketing material, social media posts, or
+    product and supplement sellers. When Indian and international guidance differ, we say so.
+  </p>
+
+  <h2 id="process">How a page is made</h2>
+  <ol>
+    <li><strong>Question first.</strong> We start from a real question a patient or family is likely to have.</li>
+    <li><strong>Gather sources.</strong> We collect the most authoritative sources available from the list above.</li>
+    <li><strong>Draft.</strong> A plain-language draft is written that summarises what those sources say, without adding claims they don't make.</li>
+    <li><strong>Check.</strong> A person checks every factual statement against its source, along with tone, clarity and safety.</li>
+    <li><strong>Publish with labels.</strong> The page goes live showing its sources, review status and the date it was checked.</li>
+  </ol>
+
+  <h2 id="review-status">Review status labels</h2>
+  <p>Medical pages carry one of two labels at the top:</p>
+  <ul>
+    <li><strong>Summarised from official sources · Not yet reviewed by a medical professional.</strong> The page faithfully summarises the named sources, but no doctor or nurse has reviewed it yet. <em>This is currently true of all our medical content.</em></li>
+    <li><strong>Medically reviewed.</strong> A qualified professional has reviewed the page. We name them, or at least their qualification, and the date.</li>
+  </ul>
+  <p>We are actively looking for medical reviewers. Until then, please treat our medical pages as a starting point for conversations with your care team.</p>
+
+  <h2 id="ai">Our use of AI tools</h2>
+  <p>
+    Hausla is built by one person with the help of AI tools, which are used to write code and prepare first drafts
+    of content. We want to be open about this. AI tools can produce text that sounds confident but is wrong, so:
+  </p>
+  <ul>
+    <li>no AI-drafted statement is published unless it has been checked against a cited source;</li>
+    <li>AI tools are never used to write or invent personal stories, quotes or testimonials;</li>
+    <li>AI tools are never used to generate statistics, contact details or directory entries; those come only from official sources.</li>
+  </ul>
+  <p>Hausla does not use AI to answer your questions or to make recommendations to you.</p>
+
+  <h2 id="directory">How the directory is verified</h2>
+  <p>For hospitals, helplines and financial-assistance schemes:</p>
+  <ul>
+    <li>Every entry is taken from an official source, such as the institution's own website or a government portal, which is linked.</li>
+    <li>Every entry shows a <strong>last verified</strong> date. Entries not re-checked within twelve months are marked as possibly out of date.</li>
+    <li>We list hospitals and departments, not individual doctors.</li>
+    <li>Costs are shown only when they come from an official source (for example, government package rates), with the source and date. We don't publish estimated or crowd-sourced prices.</li>
+    <li>Being listed is not a recommendation, and no one can pay to be listed.</li>
+  </ul>
+
+  <h2 id="statistics">Statistics and data</h2>
+  <p>Every figure we show includes its source, its publication date, the area and population it covers, and, where available, how it was measured. We clearly separate <strong>estimates and projections</strong> from <strong>recorded figures</strong>, and we never fill gaps with our own guesses.</p>
+  <p>Population statistics describe large groups, not individuals. We explain this wherever we show survival or mortality figures, and we keep statistics away from the pages people see first after a diagnosis.</p>
+
+  <h2 id="stories">Stories and communities</h2>
+  <ul>
+    <li>We never republish someone's writing without their permission. Our story library gives a short summary in our own words and links to the original.</li>
+    <li>We never invent or alter personal stories. Placeholder examples in our design are labelled “Sample”.</li>
+    <li>Stories describe one person's experience. They are not evidence that a treatment works or doesn't.</li>
+    <li>Online communities we link to offer peer support, not professional medical advice. We favour communities with active moderation.</li>
+  </ul>
+
+  <h2 id="updates">Keeping things current</h2>
+  <ul>
+    <li><strong>Crisis and helpline numbers:</strong> checked before every significant update to the site.</li>
+    <li><strong>Directory entries:</strong> re-checked at least every twelve months, and sooner when we hear of a change.</li>
+    <li><strong>Guides and medical pages:</strong> reviewed at least every twelve months, or when major guidance changes.</li>
+  </ul>
+
+  <h2 id="independence">Independence</h2>
+  <p>Hausla is free and has no advertising, sponsors or paid listings. We don't accept payment from hospitals, pharmaceutical companies, insurers or crowdfunding platforms. If that ever changes, it will be disclosed on this page and on the pages concerned.</p>
+
+  <h2 id="corrections">Corrections</h2>
+  <p>
+    If you find a mistake, an outdated number or something that feels unsafe, please <Contact purpose="report" />.
+    We aim to fix safety-related errors (for example, a wrong helpline number) as soon as we can, and to note
+    significant corrections on the page concerned.
+  </p>
+  <p>Read more: <a href={url('/disclaimer')}>Disclaimer</a> · <a href={url('/privacy')}>Privacy</a> · <a href={url('/about')}>About Hausla</a></p>
+</Page>

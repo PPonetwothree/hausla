@@ -1,0 +1,49 @@
+---
+/** Layout for text-heavy pages: policies, About. */
+import Base from './Base.astro';
+interface Props {
+  title: string;
+  eyebrow?: string;
+  lede?: string;
+  description?: string;
+  updated: string; // ISO date the page content last changed
+  toc?: { id: string; label: string }[];
+}
+const { title, eyebrow, lede, description, updated, toc = [] } = Astro.props;
+const updatedText = new Date(updated).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<Base title={title} description={description ?? lede}>
+  <article class="container page">
+    <header class="head stack">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h1>{title}</h1>
+      {lede && <p class="lede">{lede}</p>}
+      <p class="small muted">Last updated <time datetime={updated}>{updatedText}</time></p>
+    </header>
+
+    <div class="body">
+      {toc.length > 0 && (
+        <nav class="toc" aria-label="On this page">
+          <p class="eyebrow">On this page</p>
+          <ol>{toc.map((t) => <li><a href={`#${t.id}`}>{t.label}</a></li>)}</ol>
+        </nav>
+      )}
+      <div class="prose"><slot /></div>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .page { padding-block: var(--s8) var(--s6); }
+  .head { --stack: var(--s4); max-width: 46rem; margin-bottom: var(--s7); }
+  .body { display: grid; gap: var(--s6); }
+  .toc { align-self: start; padding: var(--s4) var(--s5); border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+  .toc ol { margin-top: var(--s2); padding-left: 1.2em; font-size: var(--text-sm); display: grid; gap: var(--s2); }
+  .toc a { color: var(--ink-soft); text-decoration: none; }
+  .toc a:hover { color: var(--primary); text-decoration: underline; }
+  @media (min-width: 64rem) {
+    .body { grid-template-columns: 1fr 15rem; align-items: start; }
+    .toc { grid-column: 2; grid-row: 1; position: sticky; top: 96px; }
+    .prose { grid-column: 1; grid-row: 1; }
+  }
+</style>

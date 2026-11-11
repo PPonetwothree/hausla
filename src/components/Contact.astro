@@ -1,0 +1,27 @@
+---
+/**
+ * Contact wording, or an honest note while the contact isn't set up.
+ * purpose="report" reads after "please …"; "general" reads after "write to …".
+ */
+import { site } from '../lib/site';
+interface Props { purpose?: 'report' | 'general' }
+const { purpose = 'general' } = Astro.props;
+const email = site.contactEmail;
+---
+{purpose === 'report' ? (
+  site.reportErrorUrl ? (
+    <a href={site.reportErrorUrl} rel="noopener" target="_blank">use our correction form<span class="visually-hidden"> (opens in a new tab)</span></a>
+  ) : email ? (
+    <>write to <a href={`mailto:${email}`}>{email}</a></>
+  ) : (
+    <>contact us <span class="pending">(our correction form is being set up and will appear here soon)</span></>
+  )
+) : email ? (
+  <a href={`mailto:${email}`}>{email}</a>
+) : (
+  <span class="pending">our contact address (being set up — it will appear here soon)</span>
+)}
+
+<style>
+  .pending { font-style: italic; color: var(--muted); }
+</style>

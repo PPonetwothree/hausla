@@ -1,0 +1,82 @@
+---
+import Page from '../layouts/Page.astro';
+import Contact from '../components/Contact.astro';
+import { url } from '../lib/url';
+---
+<Page
+  title="About Hausla"
+  eyebrow="About"
+  lede="Hausla is a free companion for families facing cancer in India. It is built slowly and carefully, by one person, with the goal of making the cancer journey a little less confusing and a little less lonely."
+  updated="2026-11-11"
+  toc={[
+    { id: 'why', label: 'Why Hausla exists' },
+    { id: 'who-for', label: 'Who it is for' },
+    { id: 'what-we-do', label: 'What you will find here' },
+    { id: 'what-we-dont', label: "What Hausla doesn't do" },
+    { id: 'who-builds', label: 'Who builds it' },
+    { id: 'free', label: 'Free, always' },
+    { id: 'contact', label: 'Get in touch' },
+  ]}
+>
+  <h2 id="why">Why Hausla exists</h2>
+  <p>
+    A cancer diagnosis arrives with a flood of new words, new places and new decisions, usually at the moment a
+    family is least able to take them in. Information exists, but it is scattered across hospital websites,
+    government portals, research papers and forums. Much of it is written for doctors, much of it is written for
+    other countries, and very little of it answers the questions families actually ask in the first weeks:
+    <em>Where do we go? What will it cost? Who can help us pay? What happens next? Are we doing this right?</em>
+  </p>
+  <p>
+    <strong>Hausla</strong> (हौसला) means courage: the spirit that keeps you going when things are hard. The name
+    isn't a promise that things will turn out well. It is a recognition of how much it takes to keep showing up,
+    for yourself or for someone you love.
+  </p>
+
+  <h2 id="who-for">Who it is for</h2>
+  <ul>
+    <li><strong>Caregivers and families</strong>, especially those travelling to a big city for treatment. They are our first focus, because they often carry the research, the paperwork and the hospital queues.</li>
+    <li><strong>People who have just been diagnosed</strong>, and people in or after treatment.</li>
+    <li><strong>Students and researchers</strong> who want to understand cancer science and cancer care in India.</li>
+  </ul>
+  <p>We are starting with Delhi and the surrounding region, and in English, with Hindi next.</p>
+
+  <h2 id="what-we-do">What you will find here</h2>
+  <ul>
+    <li><strong>Guides</strong> that explain cancer, treatment and everyday practicalities in plain language, summarised from official and medical sources.</li>
+    <li><strong>A directory of care</strong>: hospitals, helplines and financial-assistance schemes, each with the date we last checked it.</li>
+    <li><strong>Support</strong>: mental-health helplines, carefully chosen communities, and stories from people who have been through it, always linked to the person who wrote them.</li>
+  </ul>
+  <p>Much of this is still being written. We publish each part only when it is ready.</p>
+
+  <h2 id="what-we-dont">What Hausla doesn't do</h2>
+  <div class="callout">
+    <p>
+      Hausla is <strong>not a medical service</strong>. We cannot diagnose, recommend treatments or tell you what
+      will happen. Your doctors know your situation; we try to help you understand it and ask better questions.
+      Please read our <a href={url('/disclaimer')}>disclaimer</a>.
+    </p>
+  </div>
+
+  <h2 id="who-builds">Who builds it</h2>
+  <p>
+    Hausla is an independent, personal project. Its founder has chosen to remain anonymous, so that the focus stays
+    on the people the site serves rather than on the person behind it. Because you can't judge us by a name, we ask
+    you to judge us by how we work: every page shows its sources and when it was last checked, and our
+    <a href={url('/editorial-policy')}>editorial policy</a> explains exactly how content is made, including that
+    drafts are prepared with the help of AI tools and checked against sources by a person before publishing.
+  </p>
+  <p>
+    We do not yet have a medical professional reviewing our content. Until we do, medical pages are clearly marked
+    as summaries of official sources, not reviewed advice. If you are a doctor, nurse, pharmacist or medical student
+    and would like to help review, we would be very grateful to hear from you.
+  </p>
+
+  <h2 id="free">Free, always</h2>
+  <p>
+    Hausla will always be free to use. There are no accounts, no advertisements and no tracking, and no hospital or
+    company can pay to be listed or featured. See our <a href={url('/privacy')}>privacy policy</a>.
+  </p>
+
+  <h2 id="contact">Get in touch</h2>
+  <p>To suggest a correction, offer help or share feedback, write to <Contact />.</p>
+</Page>

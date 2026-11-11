@@ -17,15 +17,18 @@ import { url } from '../lib/url';
         Hausla shares information to help you understand cancer and find your way through care in India.
         It is <strong>not medical advice</strong> and cannot diagnose or recommend treatment.
         Always talk to your doctor before making decisions about your health or treatment.
+        <a href={url('/disclaimer')}>Read the full disclaimer</a>.
       </p>
     </div>
 
     <nav class="links" aria-label="About Hausla">
       <ul>
+        <li><a href={url('/about')}>About Hausla</a></li>
+        <li><a href={url('/editorial-policy')}>How we make Hausla</a></li>
+        <li><a href={url('/disclaimer')}>Disclaimer</a></li>
+        <li><a href={url('/privacy')}>Privacy</a></li>
         <li><a href={url('/glossary')}>Glossary</a></li>
-        <li><a href={url('/style-tile')}>Design system</a></li>
       </ul>
-      <p class="small muted">Editorial policy, sources &amp; methods, privacy and error reporting arrive in Phase 0.</p>
     </nav>
   </div>
 </footer>
