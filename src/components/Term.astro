@@ -13,17 +13,7 @@ const entry = await getEntry('glossary', id);
 if (!entry) throw new Error(`<Term>: no glossary entry with id "${id}" in src/data/glossary.yaml`);
 const tipId = `term-${id}-${Math.random().toString(36).slice(2, 8)}`;
 ---
-<span class="term" data-term={id}>
-  <button type="button" class="term-word" aria-describedby={tipId} aria-expanded="false" aria-controls={tipId}><slot /></button>
-  <span class="term-tip" id={tipId}>
-    <span class="term-head">
-      <strong>{entry.data.term}</strong>
-      {entry.data.hindi && <span class="hindi" lang="hi">{entry.data.hindi}</span>}
-    </span>
-    <span class="term-meaning">{entry.data.meaning}</span>
-    <a class="term-more" href={url(`/glossary#${id}`)} tabindex="-1">In the glossary →</a>
-  </span>
-</span>
+<span class="term" data-term={id}><button type="button" class="term-word" aria-describedby={tipId} aria-expanded="false" aria-controls={tipId}><slot /></button><span class="term-tip" id={tipId}><span class="term-head"><strong>{entry.data.term}</strong>{entry.data.hindi && <span class="hindi" lang="hi">{entry.data.hindi}</span>}</span><span class="term-meaning">{entry.data.meaning}</span><a class="term-more" href={url(`/glossary#${id}`)} tabindex="-1">In the glossary →</a></span></span>
 
 <style is:global>
   .term { position: relative; display: inline; }

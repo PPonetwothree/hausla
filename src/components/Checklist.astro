@@ -1,0 +1,52 @@
+---
+/** Tickable checklist that also prints cleanly. Ticks aren't saved anywhere. */
+interface Props { items: string[]; label: string }
+const { items, label } = Astro.props;
+const base = label.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+---
+<fieldset class="checklist">
+  <legend class="visually-hidden">{label}</legend>
+  <ul role="list">
+    {items.map((item, i) => (
+      <li>
+        <input type="checkbox" id={`${base}-${i}`} />
+        <label for={`${base}-${i}`} set:html={item} />
+      </li>
+    ))}
+  </ul>
+</fieldset>
+
+<style>
+  .checklist { border: 0; padding: 0; margin: 0; }
+  ul { list-style: none; padding: 0 !important; display: grid; gap: var(--s2); }
+  li { display: flex; gap: var(--s3); align-items: flex-start; margin: 0 !important; max-width: none; }
+  li::marker { content: none; }
+  input {
+    flex: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    margin-top: 0.2em;
+    border: 2px solid var(--primary);
+    border-radius: 6px;
+    background: var(--surface);
+    cursor: pointer;
+    display: grid;
+    place-content: center;
+    transition: background-color var(--dur-fast) var(--ease);
+  }
+  input::after {
+    content: '';
+    width: 12px;
+    height: 7px;
+    border-left: 2.5px solid #fff;
+    border-bottom: 2.5px solid #fff;
+    transform: rotate(-45deg) translate(1px, -1px);
+    opacity: 0;
+  }
+  input:checked { background: var(--primary); }
+  input:checked::after { opacity: 1; }
+  input:checked + label { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--line-strong); }
+  label { cursor: pointer; }
+  @media print { input { border-color: #333; } }
+</style>

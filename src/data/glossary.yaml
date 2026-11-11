@@ -28,3 +28,16 @@
 - id: biopsy
   term: Biopsy
   meaning: A small sample of tissue taken so it can be examined under a microscope to check for cancer cells.
+
+- id: uhid
+  term: UHID
+  meaning: Unique Hospital Identification number. A government hospital gives each patient one at their first visit; it stays the same for every later visit.
+
+- id: rain-basera
+  term: Rain basera
+  hindi: रैन बसेरा
+  meaning: A government night shelter. In Delhi, some are set up near large hospitals for patients' families.
+
+- id: attendant
+  term: Attendant
+  meaning: The family member or friend who stays with a patient at the hospital.

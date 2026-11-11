@@ -312,3 +312,30 @@ a:hover {
 .prose > :first-child {
   margin-top: 0;
 }
+
+/* ---------- Print (checklists people carry to hospital) ---------- */
+@media print {
+  .site-header,
+  .site-footer,
+  .skip-link,
+  .no-print,
+  .toc {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+    font-size: 11pt;
+  }
+  .js .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 9pt;
+    color: #444;
+  }
+  .page {
+    padding: 0 !important;
+  }
+}

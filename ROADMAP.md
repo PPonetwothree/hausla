@@ -28,7 +28,9 @@ unchecked item, finish it, update this file, commit.
 - [ ] Five Start-here path pages
 - [ ] Guides 1–3 (Understanding Cancer: The Basics; Processing the Diagnosis;
       Supporting a Loved One with Cancer) — summarised from official sources
-- [ ] Handbook: Coming to Delhi for treatment (OPD registration, stays, travel)
+- [x] Handbook draft: Coming to Delhi for treatment — on branch `handbook-coming-to-delhi`,
+      awaiting founder review. Open items: DUSIB helpline and ORS details not yet confirmed
+      from official sites (TLS errors from the sandbox); Vishram Sadan charges conflict between sources.
 - [ ] Delhi NCR hospital directory, 25–40 verified centres
 - [ ] Helplines page
 - [ ] Pagefind search with filters
@@ -66,4 +68,5 @@ unchecked item, finish it, update this file, commit.
   homepage and deploy workflow built. Style tile approved. Trust pages written
   (About, How we make Hausla, Disclaimer, Privacy); contact shows "being set up"
   until an inbox exists. Real homepage live; fixed dropped spaces site-wide
-  (compressHTML off). Next: "Coming to Delhi for treatment" handbook (needs web research).
+  (compressHTML off). Delhi handbook drafted on a review branch; network allowlist
+  extended for official sites (aiims.edu, ors.gov.in, dusib, vmmc-sjh, telemanas).

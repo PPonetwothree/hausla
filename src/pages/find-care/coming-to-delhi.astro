@@ -1,0 +1,202 @@
+---
+import Page from '../../layouts/Page.astro';
+import Term from '../../components/Term.astro';
+import SourceBadge from '../../components/SourceBadge.astro';
+import Disclosure from '../../components/Disclosure.astro';
+import Checklist from '../../components/Checklist.astro';
+import { crisis } from '../../lib/site';
+import { url } from '../../lib/url';
+
+const checked = '2026-11-11';
+
+const papers = [
+  "The patient's <strong>Aadhaar card</strong>, plus a few photocopies",
+  "The <strong>mobile phone linked to the patient's Aadhaar</strong> (it receives the booking OTP)",
+  'Any <strong>referral letter</strong> from the doctor or hospital who sent you',
+  '<strong>All earlier reports</strong> in date order: blood tests, scans (with the CD or films), biopsy reports, and discharge summaries',
+  'A written <strong>list of every medicine</strong> the patient takes now, with doses',
+  '<strong>Ayushman Bharat card</strong>, ration card or income certificate, if you have them (needed for some financial help)',
+  'Two or three <strong>passport-size photos</strong> of the patient and of the attendant',
+  'A <strong>file folder</strong> to keep everything together, and a pen and notebook',
+];
+
+const bag = [
+  'Phone charger and a power bank',
+  'Water bottle and simple food for long waits',
+  'A shawl or light blanket (waiting areas and nights can be cold)',
+  "The patient's regular medicines for the whole trip, plus a few extra days",
+  'Some cash in small notes, in case card or UPI payment fails',
+  'Phone numbers of family at home, written on paper as well as saved in the phone',
+];
+
+const sources = [
+  { title: 'Appointment system at AIIMS (notice)', publisher: 'AIIMS New Delhi, Computer Facility', url: 'https://aiims.edu/images/pdf/notice/Digital%20AIIMS/appointment%20system-white.pdf', note: 'Undated; describes the system up to 2017. Used for how ORS booking, UHID and counters work.' },
+  { title: 'Online Registration System (ORS)', publisher: 'Government of India', url: 'https://ors.gov.in', note: 'Official booking portal.' },
+  { title: "Inauguration of 'Infosys Foundation Vishram Sadan' Dharamshala at the National Cancer Institute, AIIMS", publisher: 'Infosys (press release, 2021)', url: 'https://www.infosys.com/newsroom/press-releases/2021/inauguration-vishram-sadan-dharamshala.html' },
+  { title: 'PM to inaugurate the Infosys Foundation Vishram Sadan at National Cancer Institute in Jhajjar campus of AIIMS New Delhi', publisher: 'Press Information Bureau, Government of India (2021)', url: 'https://www.pib.gov.in/PressReleaseIframePage.aspx?PRID=1765166' },
+  { title: 'CSR impact assessment reports 2022–23', publisher: 'Infosys', url: 'https://www.infosys.com/investors/reports-filings/documents/csr-impact-assessment-reports2022-23.pdf', note: 'Mentions admission documents and a tariff at the Vishram Sadan.' },
+  { title: 'Delhi Urban Shelter Improvement Board', publisher: 'Government of NCT of Delhi', url: 'https://dusib.delhi.gov.in', note: 'Runs night shelters in Delhi.' },
+];
+---
+<Page
+  title="Coming to Delhi for treatment"
+  eyebrow="Find care · Handbook"
+  lede="A practical guide for families travelling to Delhi for cancer care: what to bring, how to get an appointment, where to stay, and how to get through the first days."
+  updated={checked}
+  toc={[
+    { id: 'first', label: 'Before you read on' },
+    { id: 'papers', label: 'Papers to bring' },
+    { id: 'appointment', label: 'Getting an appointment' },
+    { id: 'day', label: 'On the day' },
+    { id: 'stay', label: 'Where to stay' },
+    { id: 'money', label: 'Help with costs' },
+    { id: 'you', label: 'Looking after yourself' },
+    { id: 'sources', label: 'Sources' },
+  ]}
+>
+  <SourceBadge status="summarised" sources={['AIIMS New Delhi', 'Government of India ORS', 'PIB']} lastChecked={checked} />
+
+  <h2 id="first">Before you read on</h2>
+  <p>
+    Travelling to a big hospital in an unfamiliar city is hard, especially when someone you love is unwell. You don't
+    need to read all of this at once. Start with <a href="#papers">the papers to bring</a>; that is the step that saves
+    the most trouble later.
+  </p>
+  <div class="callout">
+    <p>
+      <strong>Hospital procedures change often.</strong> Everything here was checked on the date at the top of the page,
+      but please confirm timings, fees and rules with the hospital itself. Where we couldn't confirm a detail from an
+      official source, we've said so instead of guessing.
+    </p>
+  </div>
+  <p class="no-print"><button class="btn btn-secondary" type="button" onclick="window.print()">Print the checklists</button></p>
+
+  <h2 id="papers">Papers to bring</h2>
+  <p>Doctors at a new hospital will want to see everything that has happened so far. Gather it before you leave home:</p>
+  <Checklist label="Papers to bring" items={papers} />
+  <Disclosure title="Why bring the old reports and scans, if they will test again?">
+    <p>
+      Earlier reports help the new doctors understand what has already been found and done, and can save time. The new
+      hospital may still repeat some tests. If a biopsy was done elsewhere, ask that hospital or lab how to collect the
+      biopsy slides or blocks in case the new hospital asks to review them.
+    </p>
+  </Disclosure>
+
+  <h3>For the journey and the waiting</h3>
+  <Checklist label="Things to carry" items={bag} />
+
+  <h2 id="appointment">Getting an appointment</h2>
+  <p>
+    AIIMS New Delhi takes appointments through the government's <strong>Online Registration System (ORS)</strong> at
+    <a href="https://ors.gov.in" rel="noopener">ors.gov.in</a>. Some other government hospitals use ORS too; check whether
+    yours is listed. According to AIIMS, this is how it works:
+  </p>
+  <ol>
+    <li>On the ORS website, choose the hospital and the department, then a date.</li>
+    <li>Verify the patient with their <strong>Aadhaar number</strong>. An OTP is sent to the mobile number linked to that Aadhaar. People without Aadhaar can register using a mobile number instead.</li>
+    <li>A new patient who verifies with Aadhaar also receives a <Term id="uhid">UHID</Term>, the patient's hospital ID number for all future visits.</li>
+    <li>A confirmation SMS is sent to the registered mobile number with the details of the visit, such as reporting time and room.</li>
+  </ol>
+  <p>
+    If you can't book online, AIIMS also describes registration counters and self-service kiosks at the hospital for
+    new appointments.
+  </p>
+  <Disclosure title="Which department should we book?">
+    <p>
+      If you have a referral letter, it usually names the department or the kind of specialist the patient should see.
+      If you are unsure, ask the doctor who referred you, or ask at the hospital's registration or enquiry counter.
+      We can't advise which department is right for a particular patient.
+    </p>
+  </Disclosure>
+  <Disclosure title="AIIMS has a cancer campus in Jhajjar, Haryana">
+    <p>
+      The National Cancer Institute (NCI) is part of AIIMS New Delhi but is located on its Jhajjar campus in Haryana,
+      outside Delhi. Before travelling, check which campus your appointment is at, and plan the journey between them.
+    </p>
+  </Disclosure>
+
+  <h2 id="day">On the day</h2>
+  <ul>
+    <li><strong>Go early.</strong> Big government hospitals are very busy, and queues for registration can be long.</li>
+    <li><strong>Get the patient's hospital card or registration slip</strong> (often called the <Term id="parchi">parchi</Term>) and keep it safe in your file. You will usually need it at every visit.</li>
+    <li><strong>Before leaving each counter or room, ask: "Where do we go next, and when?"</strong> Write the answer in your notebook.</li>
+    <li><strong>Write down what the doctor says</strong>, including the names of tests and the date of the next visit. It's fine to ask the doctor to repeat or write something down.</li>
+    <li><strong>Keep every receipt and report</strong> in date order. You will need them for follow-ups and for financial help.</li>
+  </ul>
+
+  <h2 id="stay">Where to stay</h2>
+  <p>
+    Finding a place to stay near a big hospital is one of the hardest parts for families coming from far away. These
+    are the main options. Availability changes a lot, especially in winter, so try to arrange something before you travel.
+  </p>
+  <h3>1. Ask the hospital first</h3>
+  <p>
+    Large hospitals usually have a <strong>medical social service</strong> or social worker department that helps
+    patients' families with practical problems, which can include finding a place to stay. Ask for it at the enquiry
+    counter.
+  </p>
+  <h3>2. Hospital rest houses and dharamshalas</h3>
+  <p>
+    Several hospitals have rest houses or a <Term id="dharamshala">dharamshala</Term> nearby for patients and their
+    families, often at low cost. Ask the hospital which ones serve its patients and how to apply.
+  </p>
+  <p>
+    For patients at the <strong>National Cancer Institute, AIIMS (Jhajjar campus)</strong>, the Infosys Foundation
+    built the <strong>Vishram Sadan</strong> next to the hospital. When it opened in 2021 it was described as free of
+    cost, with about 800 beds. A later Infosys report mentions documents such as the OPD card and ID, and a tariff,
+    for admission. <strong>Please confirm current charges and the process with the hospital before relying on it.</strong>
+  </p>
+  <h3>3. Government night shelters</h3>
+  <p>
+    The Delhi Urban Shelter Improvement Board (DUSIB) runs free night shelters, called <Term id="rain-basera">rain basera</Term>,
+    across Delhi, and in some seasons sets up shelters near large hospitals for patients' families. News reports
+    describe them as very crowded in winter. For current locations and the helpline, see the
+    <a href="https://dusib.delhi.gov.in" rel="noopener">DUSIB website</a>. <em>We couldn't confirm the current helpline
+    number from an official source, so we haven't listed it here yet.</em>
+  </p>
+  <h3>4. Private guest houses and dharamshalas</h3>
+  <ul>
+    <li>Ask other families in the waiting area; they often know what's nearby and what it costs.</li>
+    <li>Agree the price, and what it includes, <strong>before</strong> you pay or move in.</li>
+    <li>Be careful of anyone who approaches you outside the hospital offering rooms, faster appointments or "contacts" for money. Appointments are made only through the hospital's official system.</li>
+  </ul>
+
+  <h2 id="money">Help with costs</h2>
+  <p>
+    Treatment at government hospitals is heavily subsidised, but tests, medicines, travel and stay can still add up.
+    Help exists, including the government's Ayushman Bharat scheme, other government funds for poor patients, and
+    charities. Ask the hospital's social service department what help its patients can apply for, and keep copies of
+    every bill and report.
+  </p>
+  <p>Our full guide to financial help is being written and will appear here.</p>
+
+  <h2 id="you">Looking after yourself</h2>
+  <p>
+    Caregivers often stop eating properly, sleep on floors and push through exhaustion. You matter too. If there are
+    other family members, take turns, so everyone gets rest. Eat something even when you don't feel like it.
+  </p>
+  <div class="callout warm">
+    <p>
+      If it all feels too much, you can talk to someone, free:
+      {crisis.lines.map((l, i) => <>{i > 0 && ', or '}<a href={`tel:${l.tel}`}><strong>{l.number}</strong></a> ({l.name.split(' (')[0]})</>)}.
+    </p>
+  </div>
+
+  <h2 id="sources">Sources</h2>
+  <p class="small muted">All checked on {new Date(checked).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}.</p>
+  <ol class="sources small">
+    {sources.map((s) => (
+      <li>
+        <a href={s.url} rel="noopener">{s.title}</a>. {s.publisher}.{s.note && <> <span class="muted">{s.note}</span></>}
+      </li>
+    ))}
+  </ol>
+  <p class="small">
+    Something here wrong or out of date? Please tell us; see <a href={url('/editorial-policy#corrections')}>corrections</a>.
+  </p>
+</Page>
+
+<style>
+  .sources { padding-left: 1.25em; }
+  .sources li { overflow-wrap: anywhere; }
+</style>
