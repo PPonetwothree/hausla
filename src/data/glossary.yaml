@@ -41,3 +41,19 @@
 - id: attendant
   term: Attendant
   meaning: The family member or friend who stays with a patient at the hospital.
+
+- id: nfsa-card
+  term: NFSA ration card
+  meaning: A ration card issued under the National Food Security Act. Some financial-help schemes use it as proof that a family is eligible.
+
+- id: aay
+  term: Antyodaya (AAY) card
+  meaning: Antyodaya Anna Yojana ration card, given to the poorest households. It is one of the cards some schemes ask for.
+
+- id: medical-superintendent
+  term: Medical Superintendent
+  meaning: The senior official who runs a hospital's administration. Many scheme forms must be countersigned by them.
+
+- id: empanelled
+  term: Empanelled hospital
+  meaning: A hospital that has signed up to a scheme, so patients covered by that scheme can be treated there under it.

@@ -1,0 +1,215 @@
+---
+import Page from '../../layouts/Page.astro';
+import Term from '../../components/Term.astro';
+import Checklist from '../../components/Checklist.astro';
+import Disclosure from '../../components/Disclosure.astro';
+import { url } from '../../lib/url';
+
+const checked = '2026-11-11';
+const fmt = (d: string) => new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const docs = [
+  "Patient's <strong>Aadhaar card</strong> (and photocopies)",
+  'Family <strong>ration card</strong>: NFSA card, Antyodaya (AAY) card or BPL card, whichever you have',
+  '<strong>Income certificate</strong> of the family (usually from the Tehsildar or SDM office)',
+  '<strong>Proof of residence</strong> (for state schemes such as Delhi Arogya Kosh)',
+  "An <strong>estimate of treatment cost</strong> from the treating doctor, countersigned by the hospital's Medical Superintendent",
+  'Two or more <strong>passport-size photos</strong> of the patient',
+  'Photocopies of the <strong>treatment records</strong> and reports',
+  'Ayushman card, if the family already has one',
+];
+
+const sources = [
+  { title: 'Steps taken to assist cancer patients under Rashtriya Arogya Nidhi (RAN)', publisher: 'Press Information Bureau, Ministry of Health & Family Welfare', date: '8 August 2025', url: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2154159' },
+  { title: 'Delhi becomes 35th State/UT to implement Ayushman Bharat PM-JAY', publisher: 'Press Information Bureau', date: '5 April 2025', url: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2119281' },
+  { title: 'Enrollment for Ayushman Vay Vandana Cards reaches 25 lakhs', publisher: 'Press Information Bureau', date: '2024', url: 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2082288' },
+  { title: 'Comprehensive health plan for senior citizens (Parliament question)', publisher: 'Press Information Bureau', date: '2025', url: 'https://www.pib.gov.in/PressReleseDetailm.aspx?PRID=2110780' },
+  { title: 'Delhi Arogya Kosh (information document)', publisher: 'Health & Family Welfare Department, Govt. of NCT of Delhi', date: '2015', url: 'https://health.delhi.gov.in/sites/default/files/Health/generic_multiple_files/dak.pdf' },
+  { title: 'Frequently asked questions', publisher: "Prime Minister's National Relief Fund", date: 'undated', url: 'https://pmnrf.gov.in/en/faqs/pmnrf' },
+  { title: 'Poor patients financial support (Umbrella Scheme of RAN)', publisher: 'Ministry of Health & Family Welfare', date: 'page linked from the 2025 PIB release', url: 'https://mohfw.gov.in/?q=en/Major-Programmes/poor-patients-financial-support' },
+];
+---
+<Page
+  title="Help with treatment costs"
+  eyebrow="Find care · Financial help"
+  lede="Cancer treatment can be expensive, even at government hospitals. There is help. This page explains the main government schemes, who they are for and how to apply."
+  updated={checked}
+  toc={[
+    { id: 'start', label: 'Start here' },
+    { id: 'which', label: 'Which might apply to you?' },
+    { id: 'pmjay', label: 'Ayushman Bharat PM-JAY' },
+    { id: 'ran', label: 'Rashtriya Arogya Nidhi (cancer fund)' },
+    { id: 'dak', label: 'Delhi Arogya Kosh' },
+    { id: 'pmnrf', label: "PM's National Relief Fund" },
+    { id: 'state', label: 'Your home state' },
+    { id: 'documents', label: 'Documents to gather' },
+    { id: 'careful', label: 'Be careful' },
+    { id: 'sources', label: 'Sources' },
+  ]}
+>
+  <p class="checked small">Checked against official sources on <time datetime={checked}>{fmt(checked)}</time>. Scheme rules change; please confirm with the hospital before you rely on any detail.</p>
+
+  <h2 id="start">Start here</h2>
+  <div class="callout warm">
+    <p>
+      <strong>The single most useful step:</strong> at the hospital, ask for the <strong>medical social service</strong>
+      or <strong>patient welfare</strong> department, or the Ayushman desk. They help families apply for these schemes
+      every day, and most applications have to go through the hospital anyway.
+    </p>
+  </div>
+  <p>
+    Most government help is <strong>paid to the hospital, not to you</strong>, and most of it is for treatment at
+    government hospitals. Applications take time, so start as early as you can, ideally as soon as you have the
+    doctor's treatment plan and cost estimate.
+  </p>
+
+  <h2 id="which">Which might apply to you?</h2>
+  <div class="table-wrap">
+    <table>
+      <caption class="visually-hidden">Schemes by situation</caption>
+      <thead><tr><th scope="col">If…</th><th scope="col">Look at</th></tr></thead>
+      <tbody>
+        <tr><td>Your family has an Ayushman card, or may be eligible for one</td><td><a href="#pmjay">Ayushman Bharat PM-JAY</a></td></tr>
+        <tr><td>The patient is 70 or older (any income)</td><td><a href="#pmjay">PM-JAY for senior citizens (Vay Vandana)</a></td></tr>
+        <tr><td>The family is below the poverty line, and treatment is at a government cancer centre or hospital</td><td><a href="#ran">Rashtriya Arogya Nidhi: Health Minister's Cancer Patient Fund</a></td></tr>
+        <tr><td>The patient has lived in Delhi for 3+ years and has an NFSA ration card</td><td><a href="#dak">Delhi Arogya Kosh</a></td></tr>
+        <tr><td>The family cannot afford treatment and other help isn't enough</td><td><a href="#pmnrf">PM's National Relief Fund</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small muted">Families can sometimes use more than one scheme; for example, RAN can help PM-JAY beneficiaries with treatment that PM-JAY doesn't cover. Ask the hospital what can be combined.</p>
+
+  <!-- PM-JAY -->
+  <section class="scheme" aria-labelledby="pmjay">
+    <p class="kind">Central government · health cover</p>
+    <h2 id="pmjay">Ayushman Bharat PM-JAY</h2>
+    <dl>
+      <dt>What it is</dt>
+      <dd>A government health cover of <strong>₹5 lakh per family per year</strong> for treatment at <Term id="empanelled">empanelled</Term> hospitals.</dd>
+      <dt>Who it's for</dt>
+      <dd>Eligible poor and vulnerable families. Separately, <strong>everyone aged 70 or above</strong>, whatever their income, can get ₹5 lakh cover under Ayushman Vay Vandana.</dd>
+      <dt>In Delhi</dt>
+      <dd>Delhi joined PM-JAY in April 2025. The Delhi government announced an additional top-up of ₹5 lakh over the central cover for eligible families.</dd>
+      <dt>How to check and apply</dt>
+      <dd>Call the national helpline <a href="tel:14555"><strong>14555</strong></a>, or ask at the Ayushman desk of an empanelled hospital. Senior citizens (70+) can enrol through the Ayushman app, the beneficiary portal, an empanelled hospital or a Common Service Centre.</dd>
+    </dl>
+    <Disclosure title="Please confirm">
+      <p>Which cancer treatments are covered, and at which hospitals, depends on the scheme's package list and the hospital. Ask the hospital's Ayushman desk before treatment starts.</p>
+    </Disclosure>
+  </section>
+
+  <!-- RAN -->
+  <section class="scheme" aria-labelledby="ran">
+    <p class="kind">Central government · one-time grant</p>
+    <h2 id="ran">Rashtriya Arogya Nidhi: Health Minister's Cancer Patient Fund</h2>
+    <dl>
+      <dt>What it is</dt>
+      <dd><strong>One-time financial help of up to ₹15 lakh</strong> for cancer treatment, paid to the treating hospital.</dd>
+      <dt>Who it's for</dt>
+      <dd>Poor patients living below their state's poverty line. Antyodaya (AAY) card holders and PM-JAY beneficiaries who need treatment that PM-JAY doesn't cover can also apply, in states connected to the online system.</dd>
+      <dt>Where</dt>
+      <dd>Regional Cancer Centres, tertiary cancer centres, State Cancer Institutes and other government hospitals with cancer treatment facilities.</dd>
+      <dt>How to apply</dt>
+      <dd>
+        Through the government hospital where the patient is treated. Depending on your state, it is either
+        <strong>online</strong> (the hospital generates a RAN ID; you need an <Term id="aay">Antyodaya (AAY) card</Term> and Aadhaar) or
+        <strong>offline</strong> (a set form signed by the treating doctor and countersigned by the
+        <Term id="medical-superintendent">Medical Superintendent</Term>, with the family's income certificate and ration card).
+      </dd>
+    </dl>
+    <Disclosure title="Please confirm">
+      <p>Approval goes through several committee stages and can take time. Ask the hospital's social service or welfare department to help you start the application early.</p>
+    </Disclosure>
+  </section>
+
+  <!-- DAK -->
+  <section class="scheme" aria-labelledby="dak">
+    <p class="kind">Delhi government · for Delhi residents</p>
+    <h2 id="dak">Delhi Arogya Kosh (DAK)</h2>
+    <dl>
+      <dt>What it is</dt>
+      <dd>Financial help of <strong>up to ₹5 lakh</strong> for treatment of any illness at a government hospital (Delhi Government, Central Government, AIIMS, autonomous or local-body hospitals), paid to the hospital.</dd>
+      <dt>Who it's for</dt>
+      <dd>Patients who have an <Term id="nfsa-card">NFSA ration card</Term> and have been residents of Delhi for at least the last 3 years.</dd>
+      <dt>How to apply</dt>
+      <dd>
+        In person, at the Patient Welfare Cell, Room 1, 6th Floor, Directorate of Health Services, F-17 Karkardooma
+        (near Karkardooma Court), Delhi 110032. Phone listed: <a href="tel:01122306851">011-2230 6851</a>. Bring the
+        NFSA card copy, proof of 3 years' residence, the treating doctor's cost estimate certified by the Medical
+        Superintendent, two attested photos and copies of treatment records.
+      </dd>
+    </dl>
+    <Disclosure title="Please confirm">
+      <p>The official document we found describing DAK is from 2015. The amount, eligibility, address and phone number may have changed, and since 2025 Delhi also has PM-JAY. Please check with the hospital's welfare department before going to Karkardooma.</p>
+    </Disclosure>
+  </section>
+
+  <!-- PMNRF -->
+  <section class="scheme" aria-labelledby="pmnrf">
+    <p class="kind">Central government · partial help</p>
+    <h2 id="pmnrf">Prime Minister's National Relief Fund (PMNRF)</h2>
+    <dl>
+      <dt>What it is</dt>
+      <dd>Help for <strong>indigent patients</strong> to <strong>partly</strong> cover the cost of treatment for major diseases at government hospitals or PMNRF-empanelled private hospitals.</dd>
+      <dt>How to apply</dt>
+      <dd>
+        An application addressed to the Prime Minister (the form is on <a href="https://pmnrf.gov.in" rel="noopener">pmnrf.gov.in</a>),
+        with two passport-size photos of the patient, proof of residence, an original medical certificate stating the
+        disease and estimated cost, and the family's income certificate.
+      </dd>
+    </dl>
+    <Disclosure title="Please confirm">
+      <p>The fund says it has limited resources and cannot accept every request; help is given at the Prime Minister's discretion. Treat it as one possible source among several, not a guarantee.</p>
+    </Disclosure>
+  </section>
+
+  <h2 id="state">Your home state's schemes</h2>
+  <p>
+    Many states have their own health schemes and chief minister's relief funds, and some work in Delhi hospitals.
+    We're researching Uttar Pradesh, Bihar and Haryana next. Until then, ask the hospital's welfare department, or
+    your home district's Chief Medical Officer.
+  </p>
+
+  <h2 id="documents">Documents to gather</h2>
+  <p>Almost every scheme asks for some of these. Gathering them early saves weeks:</p>
+  <Checklist label="Documents for financial help" items={docs} />
+  <p class="no-print"><button class="btn btn-secondary" type="button" onclick="window.print()">Print this list</button></p>
+
+  <h2 id="careful">Be careful</h2>
+  <ul>
+    <li><strong>Don't pay agents or middlemen</strong> who promise to get a scheme approved. Applications go through the hospital or official government offices.</li>
+    <li>Keep <strong>photocopies of everything</strong> you submit, and note the date and the name of the office.</li>
+    <li>Ask for the <strong>application number or RAN ID</strong> so you can follow up.</li>
+  </ul>
+  <p>See also: <a href={url('/find-care/coming-to-delhi')}>Coming to Delhi for treatment</a> · <a href={url('/find-care/hospitals')}>Cancer hospitals in Delhi NCR</a></p>
+
+  <h2 id="sources">Sources</h2>
+  <p class="small muted">All accessed on {fmt(checked)}.</p>
+  <ol class="sources small">
+    {sources.map((s) => <li><a href={s.url} rel="noopener">{s.title}</a>. {s.publisher}, {s.date}.</li>)}
+  </ol>
+</Page>
+
+<style>
+  .checked { color: var(--muted); }
+  .table-wrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: var(--text-sm); }
+  th { text-align: left; font-family: var(--font-head); padding: var(--s2) var(--s3); border-bottom: 2px solid var(--line-strong); }
+  td { padding: var(--s3); border-bottom: 1px solid var(--line); vertical-align: top; }
+  .scheme {
+    margin-top: var(--s6);
+    padding: var(--s5);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    display: grid;
+    gap: var(--s3);
+  }
+  .scheme h2 { margin-top: 0 !important; font-size: var(--text-xl); scroll-margin-top: 90px; }
+  .kind { font-size: var(--text-sm); font-weight: 700; color: var(--info); }
+  dl { display: grid; gap: var(--s1); }
+  dt { font-family: var(--font-head); font-weight: 600; margin-top: var(--s2); }
+  dd { color: var(--ink-soft); }
+  .sources { padding-left: 1.25em; }
+  .sources li { overflow-wrap: anywhere; }
+</style>

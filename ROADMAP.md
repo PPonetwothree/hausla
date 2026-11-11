@@ -42,7 +42,10 @@ unchecked item, finish it, update this file, commit.
 
 ## Phase 2 — Money and care (months 3–5)
 
-- [ ] Financial-help finder (central schemes + Delhi, UP, Haryana, Bihar)
+- [x] Financial-help guide (static) — PM-JAY (+70+, Delhi top-up), RAN/HMCPF, Delhi Arogya Kosh,
+      PMNRF, documents checklist. On the review branch. DAK source is a 2015 document — confirm.
+- [ ] State schemes: UP, Bihar, Haryana (home states of many Delhi patients)
+- [ ] Interactive financial-help finder (after state schemes are researched)
 - [ ] Guides 4–7
 - [ ] Cancer-type pages for the 8 priority types
 - [ ] Expanded glossary
@@ -74,3 +77,6 @@ unchecked item, finish it, update this file, commit.
   (compressHTML off). Delhi handbook drafted on a review branch; network allowlist
   extended for official sites (aiims.edu, ors.gov.in, dusib, vmmc-sjh, telemanas, dsci,
   rgcirc, rmlh). Directory started (6 entries) + Find care landing page, same branch.
+- (session 2) Financial-help guide written from PIB/MoHFW/Delhi health/PMNRF sources; allowlist
+  extended for those. pmjay.gov.in and nha.gov.in refuse automated access (403) — PM-JAY facts
+  come from PIB releases. Branch still awaiting founder "publish".
