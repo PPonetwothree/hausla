@@ -345,3 +345,23 @@ a:hover {
     padding: 0 !important;
   }
 }
+
+/* Tables inside long-form text (Markdown guides) */
+.prose table {
+  display: block;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+  max-width: 100%;
+}
+.prose th {
+  text-align: left;
+  font-family: var(--font-head);
+  padding: var(--s2) var(--s3);
+  border-bottom: 2px solid var(--line-strong);
+}
+.prose td {
+  padding: var(--s3);
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}

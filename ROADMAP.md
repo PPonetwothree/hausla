@@ -29,7 +29,7 @@ unchecked item, finish it, update this file, commit.
 - [x] Hub pages for Learn, Guides, Support so no menu item 404s (branch `start-paths`)
 - [x] Guide 6: Supporting a Loved One with Cancer (from NCI 'Caring for the Caregiver', 2024)
 - [x] Guide 2: Processing the Diagnosis (from NCI 'Emotions and Cancer', updated Apr 2025)
-- [ ] Guide 1: Understanding Cancer: The Basics — first truly medical guide; summarise very carefully
+- [x] Guide 1: Understanding Cancer: The Basics (from 4 NCI pages) — FIRST PRIORITY for a medical reviewer
 - [x] Handbook draft: Coming to Delhi for treatment — on branch `handbook-coming-to-delhi`,
       awaiting founder review. Open items: DUSIB helpline and ORS details not yet confirmed
       from official sites (TLS errors from the sandbox); Vishram Sadan charges conflict between sources.
