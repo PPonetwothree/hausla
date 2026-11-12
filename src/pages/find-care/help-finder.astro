@@ -1,0 +1,199 @@
+---
+/**
+ * Financial-help finder. Every rule below mirrors a statement on
+ * /find-care/financial-help (which carries the sources). If that page changes,
+ * change this one too. Nothing typed here is stored or sent anywhere.
+ */
+import Base from '../../layouts/Base.astro';
+import { url } from '../../lib/url';
+
+const questions = [
+  { name: 'age', q: 'Is the patient 70 years old or older?', options: [['yes', 'Yes'], ['no', 'No']] },
+  { name: 'card', q: 'Does the family have an Ayushman card?', options: [['yes', 'Yes'], ['no', 'No'], ['unsure', 'Not sure']] },
+  { name: 'ration', q: 'Which ration card does the family have?', hint: "If you don't know which type it is, choose 'Not sure'.", options: [['aay', 'Antyodaya (AAY)'], ['nfsa', 'Another ration card'], ['none', 'No ration card'], ['unsure', 'Not sure']] },
+  { name: 'delhi', q: 'Has the patient lived in Delhi for the last 3 years or more?', options: [['yes', 'Yes'], ['no', 'No']] },
+  { name: 'hospital', q: 'Where is treatment planned?', options: [['govt', 'Government hospital'], ['private', 'Private hospital'], ['unsure', 'Not decided']] },
+] as const;
+const guide = url('/find-care/financial-help');
+---
+<Base title="Find help with treatment costs" description="Answer five simple questions to see which government schemes may be worth asking about. Nothing you enter is saved.">
+  <div class="container page">
+    <header class="head stack">
+      <p class="eyebrow"><a href={url('/find-care')}>Find care</a> · Financial help</p>
+      <h1>Which schemes should we ask about?</h1>
+      <p class="lede">Answer five questions. We'll show which government schemes may be worth asking about, and what to do next.</p>
+      <p class="private small"><strong>Private:</strong> your answers stay on this screen. Nothing is saved or sent anywhere.</p>
+    </header>
+
+    <form class="finder" data-finder aria-label="Questions">
+      {questions.map((item, i) => (
+        <fieldset>
+          <legend><span class="n" aria-hidden="true">{i + 1}</span>{item.q}</legend>
+          {'hint' in item && <p class="hint small">{item.hint}</p>}
+          <div class="chips">
+            {item.options.map(([value, label]) => (
+              <label><input type="radio" name={item.name} value={value} /> {label}</label>
+            ))}
+          </div>
+        </fieldset>
+      ))}
+      <p><button class="btn btn-quiet" type="reset">Clear my answers</button></p>
+    </form>
+
+    <section class="results" aria-labelledby="results-title">
+      <h2 id="results-title">What to ask about</h2>
+      <p class="status muted" aria-live="polite" data-status>Answer the questions above to see suggestions here.</p>
+
+      <div class="cards" data-cards>
+        <article class="card r" data-r="vayvandana" hidden>
+          <p class="kind">Ayushman Bharat · for everyone aged 70+</p>
+          <h3>Ayushman Vay Vandana card</h3>
+          <p>Everyone aged 70 or above can get ₹5 lakh of health cover a year, whatever the family's income.</p>
+          <p class="do"><strong>Next step:</strong> call <a href="tel:14555">14555</a>, or ask at the Ayushman desk of a hospital that is part of the scheme.</p>
+          <a class="more" href={`${guide}#pmjay`}>About Ayushman Bharat →</a>
+        </article>
+
+        <article class="card r" data-r="pmjay-have" hidden>
+          <p class="kind">Ayushman Bharat PM-JAY</p>
+          <h3>Use your Ayushman card</h3>
+          <p>The card gives ₹5 lakh of cover per family per year at hospitals that are part of the scheme.</p>
+          <p class="do"><strong>Next step:</strong> before treatment starts, ask the hospital's Ayushman desk whether the planned treatment is covered there.</p>
+          <a class="more" href={`${guide}#pmjay`}>About Ayushman Bharat →</a>
+        </article>
+
+        <article class="card r" data-r="pmjay-check" hidden>
+          <p class="kind">Ayushman Bharat PM-JAY</p>
+          <h3>Check if the family is eligible</h3>
+          <p>Eligible poor and vulnerable families get ₹5 lakh of cover per year.</p>
+          <p class="do"><strong>Next step:</strong> call <a href="tel:14555">14555</a> to check, or ask at a hospital's Ayushman desk.</p>
+          <a class="more" href={`${guide}#pmjay`}>About Ayushman Bharat →</a>
+        </article>
+
+        <article class="card r" data-r="ran" hidden>
+          <p class="kind">Central government · cancer fund</p>
+          <h3>Rashtriya Arogya Nidhi (Health Minister's Cancer Patient Fund)</h3>
+          <p>One-time help of up to ₹15 lakh for cancer treatment at government hospitals, for families below the poverty line, Antyodaya card holders, and Ayushman families who need treatment the card doesn't cover.</p>
+          <p class="do"><strong>Next step:</strong> ask the patient welfare or social service department of the government hospital to start the application.</p>
+          <a class="more" href={`${guide}#ran`}>About this fund →</a>
+        </article>
+
+        <article class="card r" data-r="dak" hidden>
+          <p class="kind">Delhi government · for Delhi residents</p>
+          <h3>Delhi Arogya Kosh</h3>
+          <p>Help of up to ₹5 lakh for treatment at a government hospital, for people who have lived in Delhi for 3 years or more and have an NFSA ration card. Check that your card is an NFSA card.</p>
+          <p class="do"><strong>Next step:</strong> ask the hospital's welfare department first; our information on this scheme comes from an older document.</p>
+          <a class="more" href={`${guide}#dak`}>About Delhi Arogya Kosh →</a>
+        </article>
+
+        <article class="card r" data-r="pmnrf" hidden>
+          <p class="kind">Central government · partial help</p>
+          <h3>Prime Minister's National Relief Fund</h3>
+          <p>Can pay part of the cost for patients who cannot afford treatment. The fund has limited money and cannot help everyone, so treat it as one more place to apply.</p>
+          <a class="more" href={`${guide}#pmnrf`}>How to apply →</a>
+        </article>
+
+        <article class="card r note" data-r="private" hidden>
+          <h3>If treatment is at a private hospital</h3>
+          <p>Most government funds pay only for treatment at government hospitals. Ayushman Bharat works at private hospitals that have joined the scheme. Ask the hospital before treatment starts which schemes and insurance it accepts.</p>
+        </article>
+
+        <article class="card r note" data-r="rationcheck" hidden>
+          <h3>Check your ration card</h3>
+          <p>Some schemes depend on the type of ration card. Ask at your ration shop, or the hospital's welfare department, which type of card the family has. Then come back and answer again.</p>
+        </article>
+      </div>
+
+      <div class="always" data-always hidden>
+        <h3>Whatever your answers</h3>
+        <ul>
+          <li>Ask the hospital's <strong>patient welfare or social service department</strong>. They help families apply every day.</li>
+          <li>Your <strong>home state</strong> may have its own scheme or relief fund. Ask the hospital, or your district's Chief Medical Officer.</li>
+          <li>Start gathering <a href={`${guide}#documents`}>the documents</a> now.</li>
+        </ul>
+      </div>
+
+      <p class="caveat small muted">
+        These are suggestions based on the rules described in our <a href={guide}>guide to help with treatment costs</a>,
+        where every source is listed. Only the scheme's office or the hospital can confirm whether a family is eligible.
+      </p>
+      <noscript><p>This tool needs JavaScript. You can read the full <a href={guide}>guide to help with treatment costs</a> instead.</p></noscript>
+    </section>
+  </div>
+</Base>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-finder]');
+  if (form) {
+    const status = document.querySelector<HTMLElement>('[data-status]')!;
+    const always = document.querySelector<HTMLElement>('[data-always]')!;
+    const cards = new Map<string, HTMLElement>();
+    document.querySelectorAll<HTMLElement>('[data-r]').forEach((c) => cards.set(c.dataset.r!, c));
+
+    const update = () => {
+      const f = new FormData(form);
+      const a = (k: string) => (f.get(k) as string | null) ?? '';
+      const age = a('age'), card = a('card'), ration = a('ration'), delhi = a('delhi'), hospital = a('hospital');
+      const answered = [age, card, ration, delhi, hospital].filter(Boolean).length;
+      const show = new Set<string>();
+
+      if (age === 'yes') show.add('vayvandana');
+      if (card === 'yes') show.add('pmjay-have');
+      if ((card === 'no' || card === 'unsure') && age !== 'yes') show.add('pmjay-check');
+
+      const notPrivate = hospital !== 'private';
+      const poorCard = ration === 'aay' || ration === 'nfsa';
+      if (hospital && notPrivate && (poorCard || card === 'yes')) show.add('ran');
+      if (delhi === 'yes' && poorCard && hospital && notPrivate) show.add('dak');
+      if (ration === 'unsure') show.add('rationcheck');
+      if (hospital === 'private') show.add('private');
+      if (answered === 5) show.add('pmnrf');
+
+      cards.forEach((el, key) => { el.hidden = !show.has(key); });
+      always.hidden = answered === 0;
+      const n = [...show].filter((k) => k !== 'private' && k !== 'rationcheck').length;
+      status.textContent = answered === 0
+        ? 'Answer the questions above to see suggestions here.'
+        : answered < 5
+          ? `${answered} of 5 answered. ${n} suggestion${n === 1 ? '' : 's'} so far.`
+          : `${n} scheme${n === 1 ? '' : 's'} worth asking about, based on your answers.`;
+    };
+    form.addEventListener('change', update);
+    form.addEventListener('reset', () => setTimeout(update, 0));
+    update();
+  }
+</script>
+
+<style>
+  .page { padding-block: var(--s8) var(--s6); max-width: 52rem; }
+  .head { --stack: var(--s4); margin-bottom: var(--s6); }
+  .head .eyebrow a { color: inherit; text-decoration: none; }
+  .private { padding: var(--s3) var(--s4); background: var(--surface-teal); border-radius: var(--radius-sm); }
+  .finder { display: grid; gap: var(--s5); padding: var(--s5); background: var(--surface-sage); border-radius: var(--radius); }
+  fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+  legend { display: flex; gap: var(--s3); align-items: baseline; font-family: var(--font-head); font-weight: 600; font-size: var(--text-lg); margin-bottom: var(--s3); padding: 0; }
+  .n { flex: none; display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--primary); color: var(--primary-ink); font-size: var(--text-sm); }
+  .hint { color: var(--ink-soft); margin: calc(-1 * var(--s2)) 0 var(--s3); }
+  .chips { display: flex; flex-wrap: wrap; gap: var(--s2); }
+  .chips label {
+    display: inline-flex; align-items: center; min-height: 48px; padding: var(--s2) var(--s5);
+    border: 1.5px solid var(--line-strong); border-radius: var(--radius-pill); background: var(--surface); cursor: pointer;
+  }
+  .chips label:hover { border-color: var(--primary); }
+  .chips input { position: absolute; opacity: 0; pointer-events: none; }
+  .chips label:has(input:checked) { background: var(--primary); border-color: var(--primary); color: var(--primary-ink); font-weight: 600; }
+  .chips label:has(input:focus-visible) { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+  .results { margin-top: var(--s7); display: grid; gap: var(--s4); }
+  .cards { display: grid; gap: var(--s3); }
+  .r { display: grid; gap: var(--s2); border-left: 4px solid var(--primary); }
+  .r[hidden] { display: none; }
+  .r.note { border-left-color: var(--clay); background: var(--surface-clay); }
+  .r h3 { font-size: var(--text-lg); }
+  .r p { color: var(--ink-soft); max-width: none; }
+  .kind { font-size: var(--text-sm); font-weight: 700; color: var(--info) !important; }
+  .do { color: var(--ink) !important; }
+  .more { font-weight: 600; font-size: var(--text-sm); }
+  .always { padding: var(--s5); background: var(--surface-blue); border-radius: var(--radius); }
+  .always h3 { font-size: var(--text-lg); margin-bottom: var(--s2); }
+  .always ul { padding-left: 1.2em; display: grid; gap: var(--s2); }
+</style>
