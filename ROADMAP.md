@@ -33,7 +33,8 @@ unchecked item, finish it, update this file, commit.
 - [x] Guide 5: Building Mental Strength & Resilience (from NCI PDQ 'Adjustment to Cancer', May 2025)
 - [x] Guide 7: Life During and After Cancer (from NCI 'New Normal' Apr 2025, 'Follow-Up Medical Care' Dec 2024)
 - [x] Guide 3: Making Treatment Decisions (from 5 NCI pages) — second priority for a medical reviewer
-- [ ] Guide 4: What to Expect During Treatment — most medical; last of the seven
+- [x] Guide 4: What to Expect During Treatment (from 5 NCI pages) — ALL SEVEN GUIDES WRITTEN.
+      Medical-review priority: guides 1, 4, 3
 - [x] Handbook draft: Coming to Delhi for treatment — on branch `handbook-coming-to-delhi`,
       awaiting founder review. Open items: DUSIB helpline and ORS details not yet confirmed
       from official sites (TLS errors from the sandbox); Vishram Sadan charges conflict between sources.

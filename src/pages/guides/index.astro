@@ -10,6 +10,6 @@ const items = guidePlan.map((g) => {
   return { title: g.title, text: entry?.data.summary ?? g.text, href: entry ? `/guides/${entry.id}` : undefined };
 });
 ---
-<HubPage title="Guides" eyebrow="Guides" lede="Seven plain-language guides, each summarised from official and medical sources, with every source listed. We publish each one only when it's checked.">
+<HubPage title="Guides" eyebrow="Guides" lede="Seven plain-language guides, each summarised from official and medical sources, with every source listed. Each shows when it was last checked and whether a medical professional has reviewed it.">
   <Hub items={items} />
 </HubPage>
