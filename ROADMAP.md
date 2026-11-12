@@ -35,10 +35,9 @@ unchecked item, finish it, update this file, commit.
 - [x] Guide 3: Making Treatment Decisions (from 5 NCI pages) — second priority for a medical reviewer
 - [x] Guide 4: What to Expect During Treatment (from 5 NCI pages) — ALL SEVEN GUIDES WRITTEN.
       Medical-review priority: guides 1, 4, 3
-- [x] Handbook draft: Coming to Delhi for treatment — on branch `handbook-coming-to-delhi`,
-      awaiting founder review. Open items: DUSIB helpline and ORS details not yet confirmed
-      from official sites (TLS errors from the sandbox); Vishram Sadan charges conflict between sources.
-- [~] Delhi NCR hospital directory — first 6 entries on the review branch (AIIMS IRCH, NCI Jhajjar,
+- [x] Handbook: Coming to Delhi for treatment (live). Open items: DUSIB helpline and AIIMS phone
+      numbers unverified; Vishram Sadan charges conflict between sources.
+- [~] Delhi NCR hospital directory — first 6 entries live (AIIMS IRCH, NCI Jhajjar,
       DSCI East/West, Safdarjung, RGCI Rohini) with filters. Next to add: RML, Lok Nayak, LHMC,
       GTB, ESIC, RGCI Niti Bagh, Dharamshila Narayana, Action Cancer, major private hospitals.
       AIIMS pages block automated checks: verify AIIMS phone numbers by hand.
@@ -50,10 +49,10 @@ unchecked item, finish it, update this file, commit.
 ## Phase 2 — Money and care (months 3–5)
 
 - [x] Financial-help guide (static) — PM-JAY (+70+, Delhi top-up), RAN/HMCPF, Delhi Arogya Kosh,
-      PMNRF, documents checklist. On the review branch. DAK source is a 2015 document — confirm.
+      PMNRF, documents checklist (live). DAK source is a 2015 document — confirm.
 - [ ] State schemes: UP, Bihar, Haryana (home states of many Delhi patients)
-- [ ] Interactive financial-help finder (after state schemes are researched)
-- [ ] Guides 4–7
+- [x] Interactive financial-help finder at /find-care/help-finder (5 questions, central + Delhi
+      schemes; rules mirror the financial-help page). Add state schemes to it once researched.
 - [ ] Cancer-type pages for the 8 priority types
 - [ ] Expanded glossary
 
