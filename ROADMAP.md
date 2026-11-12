@@ -92,3 +92,7 @@ unchecked item, finish it, update this file, commit.
   hosts cms.neva.gov.in, SACHIS, Bihar health — only blogs/news found so far.
 - (session 3) Guides infrastructure (collection, template, base-link plugin) + guide 6 on branch
   `guide-caregivers`. Pinned astro 7.4.4 and markdown-remark 7.3.5 (≥2 weeks old).
+- 2026-11-12 — All seven guides and site search live. At 06:32 UTC the live site rolled back to
+  the first commit (an old deploy run was re-run in the Actions tab); fixed by pushing a new
+  commit. Lesson: in Actions, only ever re-run the NEWEST "Deploy to GitHub Pages" run.
+  Next: more Delhi hospitals (6 of 25–40), helplines page, saved pages/offline.
